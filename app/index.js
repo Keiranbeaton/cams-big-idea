@@ -4,7 +4,9 @@ require('!!file?name=[name].[ext]!./html/index.html');
 require('./scss/base.scss');
 
 const angular = require('angular');
-const camApp = angular.module('camApp', [require('angular-route')]);
+const angularRoute = require('angular-route');
+const angularJWT = require('angular-jwt');
+const camApp = angular.module('camApp', [angularRoute, angularJWT]);
 
 camApp.run(['$rootScope', ($rs) => {
   $rs.authUrl = `${__API_URL__}/api`;
