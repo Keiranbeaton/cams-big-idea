@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="camApp">
+  <head>
+    <meta name="viewport" content="width=device-width" initial-scale=1.0>
+    <title>Cam's Big Idea</title>
+    <link rel="stylesheet" href="bundle.css">
+    <script src="bundle.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#/home">Cam's Big Idea</a>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/home"><i class="fa fa-home"></i> Home </a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main ng-view></main>
+    <footer>
+      <div class="container">
+        <p class="pull-left"> &copy; 2016 Keiran Beaton</p>
+      </div>
+    </footer>
+  </body>
+</html>
