@@ -17,3 +17,13 @@ camApp.run(['$rootScope', ($rs) => {
     }
   };
 }]);
+
+camApp.config(['$routeProvider', ($rp) => {
+  $rp
+  .when('/home', {
+    template: require('./html/home.html')
+  })
+  .otherwise({
+    redirectTo: 'home'
+  });
+}]);
