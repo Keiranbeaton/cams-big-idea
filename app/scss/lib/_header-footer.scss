@@ -1,0 +1,26 @@
+header {
+  background-color: $kb-nav-background;
+}
+nav.navbar {
+  margin-bottom: 0;
+}
+
+ul.kb-nav-ul {
+  height: 100%;
+  vertical-align: center;
+}
+
+ul.kb-nav.ul > li {
+  height: 100%;
+  vertical-align: center;
+}
+
+div.kb-nav-container {
+  height: 36px;
+  width: 100%;
+  margin-top: 0;
+}
+
+ol.breadcrumb {
+  margin-bottom: 0;
+}

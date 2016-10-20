@@ -1,18 +1,6 @@
 @import "vendors/bootstrap-stylesheets/_bootstrap.scss";
 @import "vendors/font-awesome-4.6.3/scss/font-awesome.scss";
 
+@import "themes";
+@import "header-footer";
 @import "home";
-
-div.kb-nav-container {
-  height: 30px;
-}
-
-ul.kb-nav-ul {
-  height: 100%;
-  vertical-align: center;
-}
-
-ul.kb-nav.ul > li {
-  height: 100%;
-  vertical-align: center;
-}
