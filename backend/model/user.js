@@ -11,11 +11,10 @@ let userSchema = mongoose.Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true}
   },
-  hometown: {type: String, required: true},
-  signUpDate: {type: String, required: true},
+  location: {type: String, required: true},
+  memberSince: {type: Date, required: true},
   experience: Array,
   availability: String,
-  employment: Array,
   skills: Array,
   education: Array,
   role: {type: String, default: 'member', required: true}
