@@ -8,22 +8,38 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-default">
+      <nav class="navbar navbar-default" ng-controller="NavController as NavCtrl">
         <div class="container">
           <div class="navbar-header">
             <a class="navbar-brand" href="#/home">Cam's Big Idea</a>
           </div>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#/home"><i class="fa fa-home"></i> Home </a></li>
+          <ul class="nav nav-pills navbar-right">
+            <li><a href="#/search"> Find A Professional </a></li>
+            <li><a href="#/signup"><i></i> Apply as Professional </a></li>
+            <li><a href="#/signin"> Login </a></li>
           </ul>
         </div>
       </nav>
+      <div class="container kb-nav-container">
+        <ol class="breadcrumb kb-header navbar-left">
+          <li><a href="#">Random Info Link</a></li>
+          <li><a href="#">Another Random Info Link</a></li>
+          <li><a href="#">About Us</a></li>
+        </ol>
+        <ol class="breadcrumb kb-header navbar-right">
+          <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+          <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+          <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+        </ol>
+      </div>
     </header>
     <main ng-view></main>
     <footer>
-      <div class="container">
-        <p class="pull-left"> &copy; 2016 Keiran Beaton</p>
-      </div>
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <p class="pull-left"> &copy; 2016 Keiran Beaton</p>
+        </div>
+      </nav>
     </footer>
   </body>
 </html>
