@@ -5,7 +5,9 @@ module.exports = (app) => {
     controller: 'AuthController',
     template: require('./signupTemplate.html'),
     bindings: {
-      baseUrl: '<'
+      baseUrl: '@',
+      config: '@',
+      industryList: '@'
     }
   });
 };

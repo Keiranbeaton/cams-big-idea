@@ -17,6 +17,7 @@ let userSchema = mongoose.Schema({
   availability: String,
   skills: Array,
   education: Array,
+  industry: String,
   role: {type: String, default: 'member', required: true}
 });
 

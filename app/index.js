@@ -24,7 +24,17 @@ camApp.config(['$routeProvider', ($rp) => {
   .when('/home', {
     template: require('./html/home.html')
   })
+  .when('/search', {
+    template: require('./html/search.html')
+  })
+  .when('/signup', {
+    template: require('./html/signup.html')
+  })
   .otherwise({
     redirectTo: 'home'
   });
 }]);
+
+require('./services')(camApp);
+require('./controllers')(camApp);
+require('./components')(camApp);

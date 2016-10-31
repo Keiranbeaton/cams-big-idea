@@ -1,0 +1,6 @@
+<div ng-if="$ctrl.errors.length">
+  <h1>Errors</h1>
+  <ul>
+    <li ng-repeat="error in $ctrl.errors">{{error.message}}<button class="btn btn-default" ng-click="$ctrl.dismiss(error)"> x </button></li>
+  </ul>
+</div>
