@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-let userSchema = mongoose.Schema({
+let companySchema = mongoose.Schema({
   firstName: {type: String, required: true},
   lastName: {type: String, required: true},
+  companyName: {type: String, required: true},
   basic: {
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true}
@@ -14,16 +15,10 @@ let userSchema = mongoose.Schema({
   locationCity: String,
   locationState: String,
   locationCountry: String,
-  memberSince: {type: Date, required: true},
-  experience: Array,
-  availability: String,
-  skills: Array,
-  education: Array,
-  industry: String,
-  role: {type: String, default: 'jobseeker'}
+  role: {type: String, default: 'employer'}
 });
 
-userSchema.methods.generateHash = function(password) {
+companySchema.methods.generateHash = function(password) {
   return new Promise((resolve, reject) => {
     bcrypt.hash(password, 8, (err, data) => {
       if (err) return reject(err);
@@ -33,7 +28,7 @@ userSchema.methods.generateHash = function(password) {
   });
 };
 
-userSchema.methods.comparePassword = function(password) {
+companySchema.methods.comparePassword = function(password) {
   return new Promise((resolve, reject) => {
     bcrypt.compare(password, this.basic.password, (err, data) => {
       if (err) return reject(err);
@@ -43,4 +38,4 @@ userSchema.methods.comparePassword = function(password) {
   });
 };
 
-module.exports = exports = mongoose.model('User', userSchema);
+module.exports = exports = mongoose.model('Company', companySchema);
