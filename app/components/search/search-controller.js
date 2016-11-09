@@ -5,17 +5,19 @@ module.exports = function(app) {
 
   function SearchController($log, $http, errors) {
     this.userUrl = this.baseUrl + '/users/';
-    this.allUsers = [];
-    this.usersLegal = [];
-    this.usersSoftware = [];
+    this.allJobseekers = [];
+    this.legal = [];
+    this.software = [];
     this.getAllUsers = function() {
       $log.debug('SearchController.getAllUsers');
-      $http.get(this.userUrl, this.config)
+      $http.get(this.userUrl + '/jobseekers', this.config)
       .then((res) => {
-        this.allUsers = res.data;
-        this.allUsers.forEach((user) => {
-          if (user.industry === 'Software') this.usersSoftware.push(user);
-          if (user.industry === 'Legal') this.usersLegal.push(user);
+        this.allJobseekers = res.data;
+        this.software = this.allJobseekers.map((user) => {
+          if (user.industry === 'Software') return user;
+        });
+        this.legal = this.allJobseekers.map((user) => {
+          if (user.industry === 'Legal') return user;
         });
       }, (err) => {
         errors.add(new Error('Network Communication failure in request for Users'));

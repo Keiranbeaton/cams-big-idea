@@ -14,13 +14,14 @@ let userSchema = mongoose.Schema({
   locationCity: String,
   locationState: String,
   locationCountry: String,
-  memberSince: {type: Date, required: true},
+  companyName: String,
+  memberSince: Date,
   experience: Array,
   availability: String,
   skills: Array,
   education: Array,
   industry: String,
-  role: {type: String, default: 'jobseeker'}
+  role: {type: String, default: 'jobseeker', required: true}
 });
 
 userSchema.methods.generateHash = function(password) {
