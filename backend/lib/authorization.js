@@ -8,7 +8,7 @@ module.exports = exports = function(roles) {
     new Promise((resolve, reject) => {
       assert(req.user, 'No Current User');
       if (req.user.role === 'admin') return resolve();
-      assert(roles.indexOf(req.user.role) !== -1, 'Unauthorized');
+      assert(roles.indexOf(req.user.role) !== -1, 'Unauthorized, No User Role');
       resolve();
     }).then(next, ErrorHandler(401, next));
   };

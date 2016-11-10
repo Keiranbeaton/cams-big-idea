@@ -11,14 +11,17 @@ let userSchema = mongoose.Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true}
   },
-  location: {type: String, required: true},
-  memberSince: {type: Date, required: true},
+  locationCity: String,
+  locationState: String,
+  locationCountry: String,
+  companyName: String,
+  memberSince: Date,
   experience: Array,
   availability: String,
   skills: Array,
   education: Array,
   industry: String,
-  role: {type: String, default: 'member', required: true}
+  role: {type: String, default: 'jobseeker'}
 });
 
 userSchema.methods.generateHash = function(password) {

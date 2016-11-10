@@ -2,37 +2,40 @@
 
 const Router = require('express').Router;
 const jsonParser = require('body-parser').json();
-const ErrorHandler = require('../lib/error-handler');
+const createError = require('http-errors');
 const User = require('../model/user');
 const BasicHTTP = require('../lib/basic-http');
 const authzn = require('../lib/authorization');
 const jwtAuth = require('../lib/jwt-auth');
+const ErrorHandler = require('../lib/error-handler');
 
 let authRouter = module.exports = exports = Router();
 
 authRouter.post('/signup', jsonParser, (req, res, next) => {
   let newUser = new User();
+  console.log('req.body:', req.body);
+  newUser.firstName = req.body.firstName;
+  newUser.lastName = req.body.lastName;
   newUser.basic.email = req.body.email;
+  newUser.role = req.body.role;
   newUser.generateHash(req.body.password)
     .then((tokenData) => {
-      newUser.save().then(() => {res.json(tokenData);}, ErrorHandler(400, next));
-    }, ErrorHandler(500, next, 'Server Error'));
+      console.log('newUser', newUser);
+      newUser.save().then(() => {
+        res.json(tokenData);
+      }, ErrorHandler(400, next, 'Bad Request'));
+    }, ErrorHandler(500, next));
 });
 
 authRouter.get('/signin', BasicHTTP, (req, res, next) => {
-  let authError = ErrorHandler(401, next, 'Authentication failed');
   User.findOne({'basic.email': req.auth.email})
     .then((user) => {
-      if (!user) return authError(new Error('User does not exist'));
+      if (!user) return next(createError(404, 'User not found'));
       user.comparePassword(req.auth.password)
-        .then(res.json.bind(res), authError);
-    }, authError);
+        .then(res.json.bind(res), ErrorHandler(401, next, 'Authentication failed'));
+    }, ErrorHandler(401, next, 'Authentication failed'));
 });
 
-authRouter.put('/addrole/:userid', jsonParser, jwtAuth, authzn(), (req, res, next) => {
-  User.update({_id: req.params.userid}, {$set: {role: req.body.role}}).then(res.json.bind(res), ErrorHandler(500, next, 'Server Error'));
-});
-
-authRouter.get('/users', jwtAuth, authzn(), (req, res, next) => {
-  User.find().then(res.json.bind(res), ErrorHandler(500, next, 'Server Error'));
+authRouter.put('/addrole/user/:userid', jsonParser, jwtAuth, authzn(), (req, res, next) => {
+  User.update({_id: req.params.userid}, {$set: {role: req.body.role}}).then(res.json.bind(res), next(createError(500, 'Server Error')));
 });

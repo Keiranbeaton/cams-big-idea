@@ -7,7 +7,7 @@
     "watch": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "start": "node ./backend/server.js",
     "heroku-postbuild": "node ./node_modules/webpack/bin/webpack.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./backend/test/test-harness.js"
   },
   "repository": {
     "type": "git",
