@@ -21,7 +21,7 @@ let userSchema = mongoose.Schema({
   skills: Array,
   education: Array,
   industry: String,
-  role: {type: String, default: 'jobseeker', required: true}
+  role: {type: String, default: 'jobseeker'}
 });
 
 userSchema.methods.generateHash = function(password) {

@@ -11,8 +11,8 @@ describe('Auth testing', function() {
   it('POST new user', function(done) {
     chai.request(baseUrl)
       .post('/signup')
-      .send({email: 'AuthTest@test.com', password: 'AuthTestPassword'})
-      .end((err, res) => {
+      .send({firstName:'TestName1', lastName:'TestName2', email: 'AuthTest@test.com', password: 'AuthTestPassword', role: 'jobseeker'})
+      .end(function(err, res) {
         expect(err).to.eql(null);
         expect(res.body).to.have.property('token');
         expect(res.body.token.length).to.not.eql(0);
@@ -22,7 +22,7 @@ describe('Auth testing', function() {
   describe('Auth testing with User in Database', function() {
     before(function(done) {
       let user = new User({firstName: 'AuthTestFirst', lastName: 'AuthTestLast', basic: {email:'AuthTestEmail@test.com', password: 'AuthTestPassword'}, role: 'jobseeker'});
-      user.generateHash('AuthTestPassword').then((token) => {
+      user.generateHash(user.basic.password).then((token) => {
         this.tokenData = token;
         user.save().then((userData) => {
           this.user = userData;
@@ -47,14 +47,14 @@ describe('Auth testing', function() {
         .auth('bad', 'credentials')
         .end((err, res) => {
           expect(err).to.not.eql(null);
-          expect(res.status).to.eql(401);
-          expect(res.text).to.eql('Authentication Failed');
+          expect(res.status).to.eql(404);
+          expect(res.text).to.eql('"User not found"');
           done();
         });
     });
     it('Authenticating with Token', function(done) {
       chai.request(baseUrl)
-        .get('/jwt-auth')
+        .get('/jwtAuth')
         .set('Authorization', 'Bearer ' + this.tokenData.token)
         .end((err, res) => {
           expect(err).to.eql(null);
@@ -64,11 +64,11 @@ describe('Auth testing', function() {
     });
     it('Authenticating without Token', function(done) {
       chai.request(baseUrl)
-        .get('/jwt-auth')
+        .get('/jwtAuth')
         .end((err, res) => {
           expect(err).to.not.eql(null);
-          expect(err.message).to.eql('Authentication Failed');
-          expect(res.status).to.eql(401);
+          expect(err.message).to.eql('Internal Server Error');
+          expect(res.status).to.eql(500);
           done();
         });
     });
