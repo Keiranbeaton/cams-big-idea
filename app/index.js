@@ -30,6 +30,9 @@ camApp.config(['$routeProvider', ($rp) => {
   .when('/signup', {
     template: require('./html/signup.html')
   })
+  .when('/profile/:id', {
+    template: require('./html/profile.html')
+  })
   .otherwise({
     redirectTo: 'home'
   });

@@ -2,8 +2,9 @@
 
 module.exports = function(app) {
   app.controller('AuthController', ['$http', '$location', '$window', '$log', 'auth', function($http, $location, $window, $log, auth) {
-    this.signup = function(user) {
-      $log.log('AuthController.signup');
+    this.signupUser = function(user) {
+      $log.log('AuthController.signupUser');
+      user.role = 'jobseeker';
       $http.post(this.baseUrl + '/signup', user)
         .then((res) => {
           auth.setToken(res.data.token);
@@ -11,6 +12,18 @@ module.exports = function(app) {
           $location.path('/');
         }, (err) => {
           $log.error('error in AuthController.signup: ' + err);
+        });
+    };
+
+    this.signupCompany = function(company) {
+      $log.log('AuthController.signupCompany');
+      company.role = 'employer';
+      $http.post(this.baseUrl + 'signup', company)
+        .then((res) => {
+          auth.setToken(res.data.token);
+          $location.path('/'); //TODO: Put in right path
+        }, (err) => {
+          $log.error('error in AuthController.signupCompany: ' + err);
         });
     };
 

@@ -11,9 +11,11 @@ let userSchema = mongoose.Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true}
   },
+  imageUrl: String,
   locationCity: String,
   locationState: String,
   locationCountry: String,
+  position: String,
   companyName: String,
   memberSince: Date,
   experience: Array,
