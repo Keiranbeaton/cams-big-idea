@@ -33,6 +33,12 @@ camApp.config(['$routeProvider', ($rp) => {
   .when('/signup/company', {
     template: require('./html/signup-company.html')
   })
+  .when('/signin', {
+    template: require('./html/signin.html')
+  })
+  .when('/signout', {
+    template: require('./html/signout.html')
+  })
   .when('/profile/:id', {
     template: require('./html/profile.html')
   })
