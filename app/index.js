@@ -27,8 +27,11 @@ camApp.config(['$routeProvider', ($rp) => {
   .when('/search', {
     template: require('./html/search.html')
   })
-  .when('/signup', {
-    template: require('./html/signup.html')
+  .when('/signup/user', {
+    template: require('./html/signup-user.html')
+  })
+  .when('/signup/company', {
+    template: require('./html/signup-company.html')
   })
   .when('/profile/:id', {
     template: require('./html/profile.html')
