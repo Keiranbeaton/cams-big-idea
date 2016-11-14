@@ -20,7 +20,8 @@ module.exports = function(app) {
         let token = this.getToken();
         if (!token) return;
         let decoded = jwt.decodeToken(token);
-        this.currentUser.username = decoded.username;
+        this.currentUser.username = decoded.firstName + ' ' + decoded.lastName;
+        this.currentUser.userId = decoded._id;
         return this.currentUser;
       },
       logOut: function() {

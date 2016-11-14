@@ -1,3 +1,8 @@
 <div ng-init="$ctrl.getUser()">
-  <p ng-hide="!$ctrl.currentUser.username">Hello {{$ctrl.currentUser.username}} <button ng-click="$ctrl.signout()">Log Out</button></p>
+  <form ng-submit="$ctrl.signout()">
+    <p>
+      Are you sure you want to log out?
+    </p>
+    <button type="submit">Log Out</button>
+  </form>
 </div>
