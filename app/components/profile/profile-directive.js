@@ -11,7 +11,7 @@ module.exports = (app) => {
         baseUrl: '@',
         config: '@',
         industryList: '@',
-        user: '@'
+        userId: '@'
       }
     };
   });

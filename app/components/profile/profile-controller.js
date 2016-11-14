@@ -4,9 +4,9 @@ module.exports = function(app) {
   app.controller(ProfileController, ['$log', '$http', 'kbErrors', ProfileController]);
   function ProfileController($log, $http, errors) {
     this.editing = false;
-    this.getUser = function(user) {
+    this.getUser = function() {
       $log.debug('ProfileController.getUser');
-      $http.get(this.baseUrl + '/users/' + user._id, this.config)
+      $http.get(this.baseUrl + '/users/' + this.userId, this.config)
       .then((res) => {
         this.user = res.data;
       }, (err) => {

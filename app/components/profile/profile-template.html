@@ -1,0 +1,24 @@
+<div class="kb-profile" ng-init="profCtrl.getUser()">
+  <div class="kb-prof-header">
+    <img src="{{profCtrl.user.imageUrl}}" alt="">
+    <div class="kb-header-info">
+      <h2>{{profCtrl.user.firstName}} {{profCtrl.user.lastName}}</h2>
+      <h3>{{profCtrl.user.position}}</h3>
+      <h4>{{profCtrl.user.company}}</h4>
+      <h4>{{profCtrl.user.locationCity}}, {{profCtrl.user.locationState}}, {{profCtrl.user.locationCountry}}</h4>
+      <h4>{{profCtrl.user.memberSince}}</h4>
+    </div>
+  </div>
+  <h4>Experience</h4>
+  <ul>
+    <li ng-repeat="exp in profCtrl.user.experience"> {{exp}} </li>
+  </ul>
+  <h4>Skills</h4>
+  <ul>
+    <li ng-repeat="skill in profCtrl.user.skills"> {{skill}} </li>
+  </ul>
+  <h4>Education</h4>
+  <ul>
+    <li ng-repeat="edu in profCtrl.user.education"> {{edu}} </li>
+  </ul>
+</div>

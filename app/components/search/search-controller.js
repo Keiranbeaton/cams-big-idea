@@ -8,6 +8,7 @@ module.exports = function(app) {
     this.allJobseekers = [];
     this.legal = [];
     this.software = [];
+    this.hasSearched = false;
     this.getAllUsers = function() {
       $log.debug('SearchController.getAllUsers');
       $http.get(this.userUrl + '/jobseekers', this.config)
