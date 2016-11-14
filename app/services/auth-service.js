@@ -29,7 +29,7 @@ module.exports = function(app) {
         this.currentUser = '';
         this.token = '';
         //TODO: set location.path
-        $location.path('/');
+        $location.path('/home');
       }
     };
   }]);

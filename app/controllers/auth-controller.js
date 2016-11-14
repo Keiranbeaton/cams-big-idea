@@ -8,8 +8,7 @@ module.exports = function(app) {
       $http.post(this.baseUrl + '/signup', user)
         .then((res) => {
           auth.setToken(res.data.token);
-          // TODO: put in the right path
-          $location.path('/');
+          $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signup: ' + err);
         });
@@ -21,7 +20,7 @@ module.exports = function(app) {
       $http.post(this.baseUrl + 'signup', company)
         .then((res) => {
           auth.setToken(res.data.token);
-          $location.path('/'); //TODO: Put in right path
+          $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signupCompany: ' + err);
         });
@@ -31,8 +30,7 @@ module.exports = function(app) {
       $http.get(this.baseUrl + '/signin', {headers: {'Authorization': 'Basic ' + $window.btoa(user.email + ':' + user.password)}})
         .then((res) => {
           auth.setToken(res.data.token);
-          //TODO: set location.path
-          $location.path('/');
+          $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signin: ' + err);
         });
