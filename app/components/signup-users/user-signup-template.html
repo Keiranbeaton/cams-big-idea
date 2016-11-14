@@ -5,9 +5,14 @@
   <input type="text" required ng-model="$ctrl.user.lastName">
   <label for="email">Email:</label>
   <input type="email" required ng-model="$ctrl.user.email">
+  <p ng-if="$ctrl.user.password !== $ctrl.user.confirmPassword">Password does not match</p>
   <label for="password">Password:</label>
   <input type="password" required ng-model="$ctrl.user.password">
   <label for="password-confirm">Confirm Password:</label>
   <input type="password" required ng-model="$ctrl.user.passwordConfirm">
+  <select>
+    <option> Choose Your Industry: </option>
+    <option ng-repeat="industry in $ctrl.industryList" ng-model="$ctrl.user.industry"> {{industry}} </option>
+  </select>
   <button class="btn btn-default" type="submit">Sign Up</button>
 </form>

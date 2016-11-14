@@ -1,11 +1,11 @@
 <div ng-init="searchCtrl.getAllUsers()">
-  <form ng-if="searchCtrl.searchIndustry===none">
+  <form ng-if="searchCtrl.searchIndustry==='none'">
     <select>
       <option ng-repeat="industry in searchCtrl.industryList" value="{{industry}}" ng-model="searchCtrl.searchIndustry">{{industry}}</option>
     </select>
   </form>
   <section ng-if="searchCtrl.searchIndustry===Legal">
-    <button type="button" ng-click="searchCtrl.searchIndustry=none">Search Different Industry</button>
+    <button type="button" ng-click="searchCtrl.searchIndustry='none'">Search Different Industry</button>
     <a href="#/profile/{{user._id}}" class="kb-search-user" ng-repeat="user in searchCtrl.legal" user-id="{{user._id}}">
       <img src="user.imageUrl" alt="" />
       <ul>
@@ -16,7 +16,7 @@
     </a>
   </section>
   <section ng-if="searchCtrl.searchIndustry===Software">
-    <button type="button" ng-click="searchCtrl.searchIndustry=none">Search Different Industry</button>
+    <button type="button" ng-click="searchCtrl.searchIndustry='none'">Search Different Industry</button>
     <a href="#/profile/{{user._id}}" class="kb-search-user" ng-repeat="user in searchCtrl.software" user-id="{{user._id"}}>
         <img src="{{user.imageUrl}}" alt="" />
         <ul>
