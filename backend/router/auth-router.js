@@ -14,10 +14,13 @@ let authRouter = module.exports = exports = Router();
 authRouter.post('/signup', jsonParser, (req, res, next) => {
   let newUser = new User();
   console.log('req.body:', req.body);
+  let currentDate = new Date();
+  newUser.memberSince = currentDate.getDate() + '/' + (currentDate.getMonth()+1) + '/' + currentDate.getFullYear();
   newUser.firstName = req.body.firstName;
   newUser.lastName = req.body.lastName;
   newUser.basic.email = req.body.email;
   newUser.role = req.body.role;
+  newUser.industry = req.body.industry;
   newUser.generateHash(req.body.password)
     .then((tokenData) => {
       console.log('newUser', newUser);

@@ -1,10 +1,11 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller(ProfileController, ['$log', '$http', 'kbErrors', 'auth', ProfileController]);
-  function ProfileController($log, $http, errors, auth) {
+  app.controller('ProfileController', ['$log', '$http', '$location', 'kbErrors', 'auth', ProfileController]);
+  function ProfileController($log, $http, $location,errors, auth) {
     this.editing = false;
     this.ownProfile = false;
+    this.userId = $location.path().slice(9);
     this.getUser = function() {
       $log.debug('ProfileController.getUser');
       if (auth.currentUser.userId === this.userId) {
