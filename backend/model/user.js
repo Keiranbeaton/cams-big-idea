@@ -17,7 +17,7 @@ let userSchema = mongoose.Schema({
   locationCountry: {type: String, default: 'Country'},
   position: {type: String, default: 'No Position Listed'},
   companyName: String,
-  memberSince: Date,
+  memberSince: String,
   experience: Array,
   availability: String,
   skills: Array,

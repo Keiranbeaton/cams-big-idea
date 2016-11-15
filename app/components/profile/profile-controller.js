@@ -14,6 +14,7 @@ module.exports = function(app) {
       $http.get(this.baseUrl + '/users/' + this.userId, this.config)
       .then((res) => {
         this.user = res.data;
+        if (this.user.imageUrl === undefined) this.user.imageUrl = '../../assets/no-image.svg';
       }, (err) => {
         errors.add(new Error('Network Communication failure in request for User'));
         $log.error('error in ProfileController.getUser:', err);

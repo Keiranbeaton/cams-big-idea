@@ -7,7 +7,7 @@
   <section ng-if="searchCtrl.searchIndustry==='Legal'">
     <button type="button" ng-click="searchCtrl.searchIndustry='none'">Search Different Industry</button>
     <a href="#/profile/{{user._id}}" class="kb-search-user" ng-repeat="user in searchCtrl.legal">
-      <img src="{{user.imageUrl}}" alt="" />
+      <img src="{{user.imageUrl}}"/>
       <ul>
         <li>{{user.firstName}} {{user.lastName}}</li>
         <li>{{user.position}}</li>
@@ -18,7 +18,7 @@
   <section ng-if="searchCtrl.searchIndustry==='Software'">
     <button type="button" ng-click="searchCtrl.searchIndustry='none'">Search Different Industry</button>
     <a href="#/profile/{{user._id}}" class="kb-search-user" ng-repeat="user in searchCtrl.software">
-        <img src="{{user.imageUrl}}" alt="" />
+        <img src="{{user.imageUrl}}"/>
         <ul>
           <li>{{user.firstName}} {{user.lastName}}</li>
           <li>{{user.position}}</li>
