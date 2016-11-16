@@ -7,6 +7,8 @@
       <h4>{{profCtrl.user.company}}</h4>
       <h4>{{profCtrl.user.locationCity}}, {{profCtrl.user.locationState}}, {{profCtrl.user.locationCountry}}</h4>
       <h4>{{profCtrl.user.memberSince}}</h4>
+      <button type="button" ng-hide="!profCtrl.ownProfile" ng-show="!profCtrl.editing"ng-click="profCtrl.editing=true"> Edit Profile</button>
+      <button type="button" ng-hide="!profCtrl.editing" ng-click="profCtrl.updateUser()">Save Profile</button>
     </div>
   </div>
   <h4>Experience</h4>

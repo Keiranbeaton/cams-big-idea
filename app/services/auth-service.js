@@ -7,28 +7,30 @@ module.exports = function(app) {
       getToken: function(options) {
         options = options || {};
         if(this.token) return this.token;
-        if($window.localStorage.token) return this.setToken($window.localStorage.token);
+        if($window.localStorage.token) return this.setToken($window.localStorage);
         if(!options.noRedirect) $location.path('/signup');
       },
-      setToken: function(token) {
-        $window.localStorage.token = token;
-        this.token = token;
+      setToken: function(tokenData) {
+        $window.localStorage.token = tokenData.token;
+        this.token = tokenData.token;
+        this.userId = tokenData.userId;
+        this.currentUser.userId = tokenData.userId;
         this.getUser();
-        return token;
+        $window.localStorage.username = this.currentUser.username;
+        return tokenData.token;
       },
       getUser: function() {
         let token = this.getToken();
         if (!token) return;
         let decoded = jwt.decodeToken(token);
-        this.currentUser.username = decoded.firstName + ' ' + decoded.lastName;
-        this.currentUser.userId = decoded._id;
+        this.currentUser.username = decoded.idd;
         return this.currentUser;
       },
       logOut: function() {
         $window.localStorage.token = '';
+        $window.localStorage.username = '';
         this.currentUser = '';
         this.token = '';
-        //TODO: set location.path
         $location.path('/home');
       }
     };

@@ -2,10 +2,11 @@
 
 module.exports = function(app) {
   app.controller('ProfileController', ['$log', '$http', '$location', 'kbErrors', 'auth', ProfileController]);
-  function ProfileController($log, $http, $location,errors, auth) {
+  function ProfileController($log, $http, $location, errors, auth) {
     this.editing = false;
     this.ownProfile = false;
     this.userId = $location.path().slice(9);
+    this.currentUser = auth.currentUser;
     this.getUser = function() {
       $log.debug('ProfileController.getUser');
       if (auth.currentUser.userId === this.userId) {
@@ -30,9 +31,9 @@ module.exports = function(app) {
         $log.error('error in ProfileController.deleteUser:', err);
       });
     };
-    this.updateUser = function(user) {
+    this.updateUser = function() {
       $log.debug('ProfileController.updateUser');
-      $http.put(this.baseUrl + '/users/' + user._id, this.config)
+      $http.put(this.baseUrl + '/users/' + this.userId, this.config)
       .then((res) => {
         this.editing = false;
       });

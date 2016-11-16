@@ -7,7 +7,7 @@ module.exports = function(app) {
       user.role = 'jobseeker';
       $http.post(this.baseUrl + '/signup', user)
         .then((res) => {
-          auth.setToken(res.data.token);
+          auth.setToken(res.data);
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signup: ' + err);
@@ -19,7 +19,7 @@ module.exports = function(app) {
       company.role = 'employer';
       $http.post(this.baseUrl + 'signup', company)
         .then((res) => {
-          auth.setToken(res.data.token);
+          auth.setToken(res.data);
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signupCompany: ' + err);

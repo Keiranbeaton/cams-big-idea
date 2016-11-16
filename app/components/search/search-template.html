@@ -1,4 +1,5 @@
 <div ng-init="searchCtrl.getAllUsers()">
+  <h2>Select Industry to Find a Professional</h2>
   <form ng-if="searchCtrl.searchIndustry==='none'">
     <select ng-model="searchCtrl.searchIndustry">
       <option ng-repeat="item in searchCtrl.industryList" value={{item}}>{{item}}</option>

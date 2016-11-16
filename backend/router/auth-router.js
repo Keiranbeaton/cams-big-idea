@@ -15,7 +15,7 @@ authRouter.post('/signup', jsonParser, (req, res, next) => {
   let newUser = new User();
   console.log('req.body:', req.body);
   let currentDate = new Date();
-  newUser.memberSince = currentDate.getDate() + '/' + (currentDate.getMonth()+1) + '/' + currentDate.getFullYear();
+  newUser.memberSince = (currentDate.getMonth() + 1) + '/' + currentDate.getDate() + '/' + currentDate.getFullYear();
   newUser.firstName = req.body.firstName;
   newUser.lastName = req.body.lastName;
   newUser.basic.email = req.body.email;
@@ -24,7 +24,9 @@ authRouter.post('/signup', jsonParser, (req, res, next) => {
   newUser.generateHash(req.body.password)
     .then((tokenData) => {
       console.log('newUser', newUser);
-      newUser.save().then(() => {
+      newUser.save().then((userReturn) => {
+        tokenData.username = userReturn.basic.email;
+        tokenData.userId = userReturn._id;
         res.json(tokenData);
       }, ErrorHandler(400, next, 'Bad Request'));
     }, ErrorHandler(500, next));
