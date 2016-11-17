@@ -3,6 +3,10 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Experience = require('./experience');
+const Education = require('./education');
+const Skill = require('./skill');
+const createError = require('http-errors');
 
 let userSchema = mongoose.Schema({
   firstName: {type: String, required: true},
@@ -18,10 +22,10 @@ let userSchema = mongoose.Schema({
   position: {type: String, default: 'No Position Listed'},
   companyName: String,
   memberSince: String,
-  experience: Array,
+  experience: [{type: mongoose.Schema.Types.ObjectId, ref: 'Experience', unique: true}],
   availability: String,
-  skills: Array,
-  education: Array,
+  skills: [{type: mongoose.Schema.Types.ObjectId, ref: 'Skill', unique: true}],
+  education: [{type: mongoose.Schema.Types.ObjectId, ref: 'Education', unique: true}],
   industry: String,
   role: {type: String, default: 'jobseeker'}
 });
@@ -43,6 +47,82 @@ userSchema.methods.comparePassword = function(password) {
       if (data === false) return reject(new Error('Password did not match'));
       resolve({token: jwt.sign({idd: this.basic.email}, process.env.APP_SECRET)});
     });
+  });
+};
+
+userSchema.methods.addExperience = function(data) {
+  let result;
+  return new Promise((resolve, reject) => {
+    if (!data.title || !data.userId) {
+      return reject(createError(400, 'Experience requires a job title and userId'));
+    }
+    new Experience(data).save()
+      .then(exp => {
+        result = exp;
+        this.experience.push(exp._id);
+        return this.save();
+      })
+      .then(() => resolve(result))
+      .catch(reject);
+  });
+};
+
+userSchema.methods.addEducation = function(data) {
+  let result;
+  return new Promise((resolve, reject) => {
+    if (!data.school || !data.degree || !data.major || !data.userId) return reject(createError(400, 'Education requires School, degree, major, userId'));
+    new Education(data).save().then(edu => {
+      result = edu;
+      this.education.push(edu._id);
+      return this.save();
+    })
+    .then(() => resolve(result))
+    .catch(reject);
+  });
+};
+
+userSchema.methods.addSkill = function(data) {
+  let result;
+  return new Promise((resolve, reject) => {
+    if (!data.content || !data.userId) return reject(createError(400, 'Skill requires content and userId'));
+    new Skill(data).save()
+      .then(skill => {
+        result = skill;
+        this.skills.push(skill._id);
+        return this.save();
+      })
+      .then(() => resolve(result))
+      .catch(reject);
+  });
+};
+
+userSchema.methods.removeExperienceById = function(expId) {
+  return new Promise((resolve, reject) => {
+    this.experience.filter(value => {
+      if (value === expId) return false;
+      return true;
+    });
+    this.save()
+      .then(() => {
+        return Experience.findByIdAndRemove(expId);
+      })
+      .then(exp => resolve(exp))
+      .catch(reject);
+  });
+};
+
+userSchema.methods.removeEducationById = function(eduId) {
+  return new Promise((resolve, reject) => {
+    this.education.filter(value => {
+      if (value === eduId) return false;
+      return true;
+    });
+    this.save()
+      .then(() => {
+        return Education.findByIdAndRemove(eduId);
+      })
+      .then(edu => resolve(edu))
+      .catch(reject);
   });
 };
 
