@@ -126,4 +126,19 @@ userSchema.methods.removeEducationById = function(eduId) {
   });
 };
 
+userSchema.methods.removeSkillById = function(skillId) {
+  return new Promise((resolve, reject) => {
+    this.skills.filter(value => {
+      if (value === skillId) return false;
+      return true;
+    });
+    this.save()
+      .then(() => {
+        return Skill.findByIdAndRemove(skillId);
+      })
+      .then(skill => resolve(skill))
+      .catch(reject);
+  });
+};
+
 module.exports = exports = mongoose.model('User', userSchema);
