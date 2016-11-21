@@ -33,7 +33,7 @@ module.exports = function(app) {
     };
     this.updateUser = function() {
       $log.debug('ProfileController.updateUser');
-      $http.put(this.baseUrl + '/users/' + this.userId, this.config)
+      $http.put(this.baseUrl + '/users/' + this.userId, this.user, this.config)
       .then((res) => {
         this.editing = false;
       });
