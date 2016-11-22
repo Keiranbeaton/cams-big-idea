@@ -2,11 +2,11 @@
 
 module.exports = function(app) {
   app.controller('ExperienceFormCtrl', ['$scope', function($scope) {
-    this.user = $scope.user || {};
+    this.experience = $scope.experience || {};
     this.save = $scope.save;
     this.saveAndNull = () => {
-      this.save({user: this.user});
-      if (!$scope.user) this.user = null;
+      this.save({experience: this.experience});
+      if (!$scope.experience) this.experience = null;
     };
   }]);
 };

@@ -9,7 +9,7 @@ module.exports = (app) => {
       transclude: true,
       scope: {
         save: '&',
-        user: '='
+        skill: '='
       }
     };
   });

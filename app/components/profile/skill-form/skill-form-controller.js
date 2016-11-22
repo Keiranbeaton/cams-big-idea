@@ -2,11 +2,11 @@
 
 module.exports = function(app) {
   app.controller('SkillFormController', ['$scope', function($scope) {
-    this.user = $scope.user || {};
+    this.skill = $scope.skill || {};
     this.save = $scope.save;
     this.saveAndNull = () => {
-      this.save({user: this.user});
-      if ($scope.user) this.user = null;
+      this.save({skill: this.skill});
+      if ($scope.skill) this.skill = null;
     };
   }]);
 };

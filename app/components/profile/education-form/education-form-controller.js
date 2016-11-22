@@ -2,11 +2,11 @@
 
 module.exports = function(app) {
   app.controller('EducationFormController', ['$scope', function($scope) {
-    this.user = $scope.user || {};
+    this.education = $scope.education || {};
     this.save = $scope.save;
     this.saveAndNull = () => {
-      this.save({user: this.user});
-      if (!$scope.user) this.user = null;
+      this.save({education: this.education});
+      if (!$scope.education) this.education = null;
     };
   }]);
 };

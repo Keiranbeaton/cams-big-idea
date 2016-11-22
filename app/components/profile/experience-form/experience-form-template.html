@@ -1,0 +1,24 @@
+<form class="form-inline" novalidate ng-submit="efCtrl.saveAndNull(efCtrl.experience)">
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input type="text" name="title" ng-model="efCtrl.experience.title">
+  </div>
+  <div class="form-group">
+    <label for="company">Company:</label>
+    <input type="text" name="company" ng-model="efCtrl.experience.company">
+  </div>
+  <div class="form-group">
+    <label for="start">Start Year:</label>
+    <input type="number" name="start" ng-model="efCtrl.experience.start">
+  </div>
+  <div class="form-group">
+    <label for="finish">Finish Year:</label>
+    <input type="number" name="finish" ng-model="efCtrl.experience.finish">
+  </div>
+  <div class="form-group">
+    <label for="description">School:</label>
+    <input type="text" name="description" ng-model="efCtrl.experience.description">
+  </div>
+  <button type="submit" class="btn btn-default">Add Experience</button>
+  <ng-transclude></ng-transclude>
+</form>
