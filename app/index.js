@@ -6,7 +6,8 @@ require('./scss/base.scss');
 const angular = require('angular');
 const angularRoute = require('angular-route');
 const angularJWT = require('angular-jwt');
-const camApp = angular.module('camApp', [angularRoute, angularJWT]);
+const ngFileUpload = require('ng-file-upload');
+const camApp = angular.module('camApp', [angularRoute, angularJWT, ngFileUpload]);
 
 camApp.run(['$rootScope', ($rs) => {
   $rs.baseUrl = `${__API_URL__}/api`;

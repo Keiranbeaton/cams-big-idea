@@ -55,6 +55,7 @@
     "jsonwebtoken": "^7.1.9",
     "mongoose": "^4.6.2",
     "morgan": "^1.7.0",
+    "ng-file-upload": "^12.2.13",
     "node-sass": "^3.10.1",
     "postcss-loader": "^0.13.0",
     "sass-loader": "^4.0.2",

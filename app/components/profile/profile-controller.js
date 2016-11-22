@@ -4,6 +4,9 @@ module.exports = function(app) {
   app.controller('ProfileController', ['$log', '$http', '$location', 'kbErrors', 'auth', ProfileController]);
 
   function ProfileController($log, $http, $location, errors, auth) {
+    this.editingEducation = false;
+    this.editingSkills = false;
+    this.editingExperience = false;
     this.editing = false;
     this.ownProfile = false;
     this.userId = $location.path().slice(9);
@@ -11,7 +14,7 @@ module.exports = function(app) {
     this.skills = [];
     this.education = [];
     this.experience = [];
-    
+
     this.getUser = function() {
       $log.debug('ProfileController.getUser');
       if (auth.currentUser.userId === this.userId) {

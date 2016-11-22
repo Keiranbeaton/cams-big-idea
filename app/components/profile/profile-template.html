@@ -7,8 +7,7 @@
       <h4>{{profCtrl.user.company}}</h4>
       <h4>{{profCtrl.user.locationCity}}, {{profCtrl.user.locationState}}, {{profCtrl.user.locationCountry}}</h4>
       <h4>{{profCtrl.user.memberSince}}</h4>
-      <button type="button" ng-hide="!profCtrl.ownProfile" ng-show="!profCtrl.editing"ng-click="profCtrl.editing=true"> Edit Profile</button>
-      <button type="button" ng-hide="!profCtrl.editing" ng-click="profCtrl.updateUser()">Save Profile</button>
+      <button type="button" ng-hide="!profCtrl.ownProfile" ng-show="!profCtrl.editing"ng-click="profCtrl.editing=true"> Edit Profile </button>
     </div>
   </div>
   <h4>Experience</h4>
@@ -23,16 +22,16 @@
       </ul>
     </li>
   </ul>
-  <kb-experience-form save="profCtrl.addExperience(user)"></kb-experience-form>
+  <kb-experience-form save="profCtrl.addExperience(user)" ng-show="profCtrl.editing"></kb-experience-form>
   <h4>Skills</h4>
   <ul>
     <li ng-repeat="skill in profCtrl.skills">
       <ul>
-        <li>{{skill.content}} <button ng-click="profCtrl.removeSkill({{skill}})">x</button></li>
+        <li>{{skill.content}} <button ng-click="profCtrl.removeSkill({{skill}})" ng-show="profCtrl.editing">x</button></li>
       </ul>
     </li>
   </ul>
-  <kb-skill-form save="profCtrl.addSkill(skill)"></kb-skill-form>
+  <kb-skill-form save="profCtrl.addSkill(skill)" ng-show="profCtrl.editing"></kb-skill-form>
   <h4>Education</h4>
   <ul>
     <li ng-repeat="edu in profCtrl.education">
@@ -42,9 +41,9 @@
         <li>{{edu.school}}</li>
         <li>From {{edu.start}} to {{edu.finish}}</li>
         <li>{{edu.description}}</li>
-        <button ng-click="profCtrl.removeEducation({{edu}})"> Remove Education </button>
+        <button ng-click="profCtrl.removeEducation({{edu}})" ng-show="profCtrl.editing"> Remove Education </button>
       </ul>
     </li>
   </ul>
-  <kb-education-form save="profCtrl.addEducation(education)"></kb-education-form>
+  <kb-education-form save="profCtrl.addEducation(education)" ng-show="profCtrl.editing"></kb-education-form>
 </div>

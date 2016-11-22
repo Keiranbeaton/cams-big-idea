@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('ExperienceFormCtrl', ['$scope', function($scope) {
+  app.controller('ExperienceFormController', ['$scope', function($scope) {
     this.experience = $scope.experience || {};
     this.save = $scope.save;
     this.saveAndNull = () => {

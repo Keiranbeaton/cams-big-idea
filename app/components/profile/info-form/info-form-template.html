@@ -1,0 +1,17 @@
+<form ng-submit="profCtrl.updateUser()" ng-hide="!profCtrl.editing">
+  <label for="firstName">First name:</label>
+  <input type="text" name="firstName" ng-model="profCtrl.user.firstName">
+  <label for="lastName">Last name:</label>
+  <input type="text" name="lastName" ng-model="profCtrl.user.lastName">
+  <label for="position">Position:</label>
+  <input type="text" name="position" ng-model="profCtrl.user.position">
+  <label for="company">Company</label>
+  <input type="text" name="company" ng-model="profCtrl.user.company">
+  <label for="locationCity">City:</label>
+  <input type="text" name="locationCity" ng-model="profCtrl.user.locationCity">
+  <label for="locationState">State/Province:</label>
+  <input type="text" name="locationState" ng-model="profCtrl.user.locationState">
+  <label for="locationCountry">Country:</label>
+  <input type="text" name="Country" ng-model="profCtrl.user.locationCountry">
+  <button type="submit" ng-hide="!profCtrl.editing">Save Profile</button>
+</form>
