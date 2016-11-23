@@ -9,7 +9,8 @@ module.exports = (app) => {
       transclude: true,
       scope: {
         save: '&',
-        file: '='
+        file: '=',
+        baseUrl: '@'
       }
     };
   });
