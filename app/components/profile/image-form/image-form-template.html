@@ -1,0 +1,10 @@
+<div>
+  <button ngf-select="imCtrl.uploadFile(imCtrl.file, imCtrl.errFile)" accept="image/*" ngf-max-size="16MB">Select File</button>
+  <div>
+    <p>File:</p>
+    <p>{{imCtrl.file.name}}</p>
+    <span class="progress" ng-show="imCtrl.file.progress >= 0">
+      <div style="width:{{imCtrl.file.progress}}%" ng-bind="imCtrl.file.progress + '%'"></div>
+    </span>
+  </div>
+</div>

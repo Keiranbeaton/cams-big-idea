@@ -10,6 +10,7 @@ module.exports = (app) => {
       scope: {
         save: '&',
         file: '=',
+        userId: '@',
         baseUrl: '@'
       }
     };

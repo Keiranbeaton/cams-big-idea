@@ -13,7 +13,7 @@ let userRouter = module.exports = exports = Router();
 
 userRouter.get('/', (req, res, next) => {
   debug('GET /api/users');
-  User.find().populate('skills education experience').then((users) => {res.send(users);}).catch(next);
+  User.find().populate('skills education experience image').then((users) => {res.send(users);}).catch(next);
 });
 
 userRouter.get('/jobseekers', (req, res, next) => {

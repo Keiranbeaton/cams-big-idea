@@ -15,6 +15,7 @@ const userRouter = require('./router/user-router');
 const educationRouter = require('./router/education-router');
 const experienceRouter = require('./router/experience-router');
 const skillRouter = require('./router/skill-router');
+const imageRouter = require('./router/image-router');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -31,6 +32,7 @@ app.use('/api/users', userRouter);
 app.use('/api', educationRouter);
 app.use('/api', experienceRouter);
 app.use('/api', skillRouter);
+app.use('/api', imageRouter);
 
 app.all('*', function(req, res, next) {
   debug('hit 404 route');

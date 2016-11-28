@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const Experience = require('./experience');
 const Education = require('./education');
 const Skill = require('./skill');
+const Image = require('./image');
 const createError = require('http-errors');
 
 let userSchema = mongoose.Schema({
@@ -15,7 +16,7 @@ let userSchema = mongoose.Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true}
   },
-  imageUrl: String,
+  image: {type: mongoose.Schema.Types.ObjectId, ref: 'Image', unique: true},
   locationCity: {type: String, default: 'City'},
   locationState: {type: String, default: 'State'},
   locationCountry: {type: String, default: 'Country'},
@@ -89,6 +90,21 @@ userSchema.methods.addSkill = function(data) {
       .then(skill => {
         result = skill;
         this.skills.push(skill._id);
+        return this.save();
+      })
+      .then(() => resolve(result))
+      .catch(reject);
+  });
+};
+
+userSchema.methods.addImage = function(data) {
+  let result;
+  return new Promise((resolve, reject) => {
+    if(!data.userId || !data.imageUrl) return reject(createError(400, 'Image requires a url and a userId'));
+    new Image(data).save()
+      .then(image => {
+        result = image;
+        this.image = image._id;
         return this.save();
       })
       .then(() => resolve(result))
