@@ -5,7 +5,7 @@ module.exports = (app) => {
     return {
       controller: 'ExperienceFormController',
       controllerAs: 'efCtrl',
-      template: require('./experience-formp-controller.html'),
+      template: require('./experience-form-template.html'),
       transclude: true,
       scope: {
         save: '&',

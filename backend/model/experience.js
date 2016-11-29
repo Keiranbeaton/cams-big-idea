@@ -14,4 +14,4 @@ let experienceSchema = mongoose.Schema({
   finish: String
 });
 
-module.exports = mongoose.Model('Experience', experienceSchema);
+module.exports = exports = mongoose.model('Experience', experienceSchema);

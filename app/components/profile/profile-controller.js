@@ -8,7 +8,7 @@ module.exports = function(app) {
     this.editingSkills = false;
     this.editingExperience = false;
     this.editingImage = false;
-    this.editingProfile = false;
+    this.editing = false;
     this.ownProfile = false;
     this.userId = $location.path().slice(9);
     this.currentUser = auth.currentUser;
@@ -18,6 +18,7 @@ module.exports = function(app) {
 
     this.getUser = function() {
       $log.debug('ProfileController.getUser');
+      $log.log('auth:', auth);
       if (auth.currentUser.userId === this.userId) {
         this.ownProfile = true;
       }
@@ -27,7 +28,9 @@ module.exports = function(app) {
         this.skills = this.user.skills;
         this.education = this.user.education;
         this.experience = this.user.experience;
-        if (this.user.imageUrl === undefined) this.user.imageUrl = require('../../assets/no-image.svg');
+        if (this.user.image === undefined) {
+          this.image = require('../../assets/no-image.svg');
+        }
       }, (err) => {
         errors.add(new Error('Network Communication failure in request for User'));
         $log.error('error in ProfileController.getUser:', err);
@@ -63,6 +66,7 @@ module.exports = function(app) {
         .then((res) => {
           $log.log('Successfully added education', res.data);
           this.education.push(res.data);
+          this.editingEducation = false;
         })
         .catch((err) => {
           errors.add(new Error('Network communication failure in add education request'));
@@ -89,6 +93,7 @@ module.exports = function(app) {
         .then((res) => {
           $log.log('Successfully added experience', res.data);
           this.experience.push(res.data);
+          this.editingExperience = false;
         })
         .catch((err) => {
           errors.add(new Error('Network communication failure in add experience request'));
@@ -115,6 +120,7 @@ module.exports = function(app) {
         .then((res) => {
           $log.log('Successfully added skill', res.data);
           this.skills.push(res.data);
+          this.editingSkills = false;
         })
         .catch((err) => {
           errors.add(new Error('Network communcation failure in add skill request'));

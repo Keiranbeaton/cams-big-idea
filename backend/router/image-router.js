@@ -6,10 +6,10 @@ const multipartyMiddleware = multiparty();
 const createError = require('http-errors');
 const debug = require('debug')('image:image-router');
 const fs = require('fs');
+const User = require('../model/user');
 const Image = require('../model/image');
-const User = require('../model/User');
 
-let imageRouter = module.exports = exports = new Router();
+let imageRouter = module.exports = exports = Router();
 
 imageRouter.post('/image/uploads', multipartyMiddleware, function(req, res, next){
   debug('POST api/image/uploads');

@@ -5,7 +5,8 @@ module.exports = (app) => {
     controller: 'AuthController',
     template: require('./signinTemplate.html'),
     bindings: {
-      baseUrl: '<'
+      baseUrl: '<',
+      config: '<'
     }
   });
 };

@@ -15,4 +15,4 @@ let educationSchema = mongoose.Schema({
   description: String
 });
 
-module.exports = mongoose.Model('Education', educationSchema);
+module.exports = exports = mongoose.model('Education', educationSchema);

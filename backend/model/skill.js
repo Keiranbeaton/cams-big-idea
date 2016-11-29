@@ -10,4 +10,4 @@ let skillSchema = mongoose.Schema({
   content: {type: String, required: true}
 });
 
-module.exports = mongoose.Model('Skill', skillSchema);
+module.exports = exports = mongoose.model('Skill', skillSchema);

@@ -10,4 +10,4 @@ let imageSchema = mongoose.Schema({
   imageUrl: String
 });
 
-module.exports = mongoose.Model('Image', imageSchema);
+module.exports = exports = mongoose.model('Image', imageSchema);
