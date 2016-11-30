@@ -20,14 +20,14 @@ imageRouter.post('/image/uploads', multipartyMiddleware, function(req, res, next
   fs.readFile(req.files.file.path, function(err, data) {
     fs.writeFile(newPath, data, function(err) {
       if (err) console.log('error in fs.writeFile', err);
-    });
-  });
-  User.findById(imageData.userId)
-    .then(user => {
-      user.addImage(imageData)
+      User.findById(imageData.userId)
+      .then(user => {
+        user.addImage(imageData)
         .then(() => res.send(req.body.userId + '-' + req.files.file.name))
         .catch(next);
-    }).catch(err => next(createError(404, 'User does not exist')));
+      }).catch(err => next(createError(404, 'User does not exist')));
+    });
+  });
 });
 
 imageRouter.get('/image/:id', function(req, res, next) {

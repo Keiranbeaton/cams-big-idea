@@ -27,7 +27,9 @@ let userSchema = mongoose.Schema({
   role: {type: String, default: 'jobseeker'},
   companyName: String,
   memberSince: String,
-  availability: String,
+  availabilityDay: Array,
+  availabilityStart: Array,
+  availabilityEnd: Array,
   industry: String
 });
 
@@ -100,7 +102,6 @@ userSchema.methods.addSkill = function(data) {
 userSchema.methods.addImage = function(data) {
   let result;
   return new Promise((resolve, reject) => {
-    console.log('data in user.js:', data);
     if(!data.userId || !data.imageUrl) return reject(createError(400, 'Image requires a url and a userId'));
     new Image(data).save()
       .then(image => {

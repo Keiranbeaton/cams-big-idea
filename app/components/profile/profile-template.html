@@ -5,14 +5,44 @@
       <img src="{{profCtrl.image}}">
       <button ng-click="profCtrl.editingImage=true" ng-hide="!profCtrl.editing" ng-show="!profCtrl.editingImage"> Add/Update Image </button>
       <button ng-click="profCtrl.editingImage=false" ng-show="profCtrl.editingImage"> Cancel </button>
-      <kb-image-form save="profCtrl.updateImage(image)" ng-show="profCtrl.editingImage"></kb-image-form>
+      <div ng-show="profCtrl.editingImage">
+        <button type="file" ngf-select="profCtrl.uploadImage($file, $invalidFiles)" accept="image/*" ngf-max-size="16MB"> Select Image File </button>
+        <div>
+          <p>File:</p>
+          <p>{{profCtrl.file.name}} {{profCtrl.errFile.name}} {{profCtrl.errFile.$error}} {{profCtrl.errFile.$errorParam}}</p>
+          <span class="progress" ng-show="profCtrl.file.progress >= 0">
+            <div style="width:{{profCtrl.file.progress}}%" ng-bind="profCtrl.file.progress + '%'"></div>
+          </span>
+        </div>
+      </div>
     </div>
     <div class="kb-header-info">
       <h2>{{profCtrl.user.firstName}} {{profCtrl.user.lastName}}</h2>
       <h3>{{profCtrl.user.position}}</h3>
       <h4>{{profCtrl.user.companyName}}</h4>
       <h4>{{profCtrl.user.locationCity}}, {{profCtrl.user.locationState}}, {{profCtrl.user.locationCountry}}</h4>
-      <h4>{{profCtrl.user.memberSince}}</h4>
+      <h4>Availability</h4>
+      <table>
+        <tr>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+          <th>Sun</th>
+        </tr>
+        <tr>
+          <td ng-repeat="day in profCtrl.available"><i class="fa-check" aria-hidden="true" ng-show="{{day}}"></i><i class="fa-times" aria-hidden="true" ng-show="!{{day}}"></i></td>
+        </tr>
+        <tr>
+          <td ng-repeat="hour in profCtrl.startHours">{{hour}}</td>
+        </tr>
+        <tr>
+          <td ng-repeat="hour in profCtrl.endHours">{{hour}}</td>
+        </tr>
+      </table>
+      <h4>Member Since {{profCtrl.user.memberSince}}</h4>
     </div>
     <form ng-submit="profCtrl.updateUser()" ng-hide="!profCtrl.editing">
       <label for="firstName">First name:</label>
@@ -23,6 +53,33 @@
       <input type="text" name="position" ng-model="profCtrl.user.position">
       <label for="company">Company</label>
       <input type="text" name="company" ng-model="profCtrl.user.companyName">
+      <p>Availability</p>
+      <table>
+        <tr>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+          <th>Sun</th>
+        </tr>
+        <tr>
+          <td>
+            <select ng-model="profCtrl.available[0]">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td ng-repeat="hour in profCtrl.startHours">{{hour}}</td>
+        </tr>
+        <tr>
+          <td ng-repeat="hour in profCtrl.endHours">{{hour}}</td>
+        </tr>
+
+      </table>
       <label for="locationCity">City:</label>
       <input type="text" name="locationCity" ng-model="profCtrl.user.locationCity">
       <label for="locationState">State/Province:</label>

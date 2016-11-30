@@ -13,7 +13,6 @@ let authRouter = module.exports = exports = Router();
 
 authRouter.post('/signup', jsonParser, (req, res, next) => {
   let newUser = new User();
-  console.log('req.body:', req.body);
   let currentDate = new Date();
   newUser.memberSince = (currentDate.getMonth() + 1) + '/' + currentDate.getDate() + '/' + currentDate.getFullYear();
   newUser.firstName = req.body.firstName;
@@ -23,7 +22,6 @@ authRouter.post('/signup', jsonParser, (req, res, next) => {
   newUser.industry = req.body.industry;
   newUser.generateHash(req.body.password)
     .then((tokenData) => {
-      console.log('newUser', newUser);
       newUser.save().then((userReturn) => {
         tokenData.username = userReturn.basic.email;
         tokenData.userId = userReturn._id;
@@ -38,7 +36,6 @@ authRouter.get('/signin', BasicHTTP, (req, res, next) => {
       if (!user) return next(createError(404, 'User not found'));
       user.comparePassword(req.auth.password)
         .then((tokenData) => {
-          console.log('tokenData in authRouter.get:', tokenData);
           tokenData.userId = user._id;
           res.json(tokenData);
         }, ErrorHandler(401, next, 'Authentication Failed'));

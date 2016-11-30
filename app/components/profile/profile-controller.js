@@ -15,6 +15,9 @@ module.exports = function(app) {
     this.skills = [];
     this.education = [];
     this.experience = [];
+    this.startHours = [];
+    this.endHours = [];
+    this.available = [];
 
     this.getUser = function() {
       $log.debug('ProfileController.getUser');
@@ -27,6 +30,23 @@ module.exports = function(app) {
         this.skills = this.user.skills;
         this.education = this.user.education;
         this.experience = this.user.experience;
+        this.available = this.user.availabilityDay;
+        this.startHours = this.user.availabilityStart.map((num) => {
+          if(num === undefined) return 'N/A';
+          if(num === 0) return '12am';
+          if(num > 0 && num < 12) return num + 'am';
+          if(num === 12) return num + 'pm';
+          if (num > 12) return (num-12) + 'pm';
+        });
+        this.endHours = this.user.availabilityEnd.map((num) => {
+          if(num === undefined) return 'N/A';
+          if(num === 0) return '12am';
+          if(num > 0 && num < 12) return num + 'am';
+          if(num === 12) return num + 'pm';
+          if (num > 12) return (num-12) + 'pm';
+        });
+
+
         if (this.user.image === undefined) {
           this.image = require('../../assets/no-image.svg');
         } else {
@@ -143,26 +163,27 @@ module.exports = function(app) {
     };
 
     this.uploadImage = function(file, errFiles) {
-      $log.debug('ProfileController.addImage');
+      $log.debug('ProfileController.uploadImage');
+      this.file = file;
+      this.errFile = errFiles && errFiles[0];
       if (file) {
         file.upload = ngUpload.upload({
           url: this.baseUrl + '/image/uploads',
           method: 'POST',
           data: {file: file, userId: this.user._id}
         });
-        file.upload.then(function(res) {
-          $timeout(function() {
+        file.upload.then((res) => {
+          $timeout(() => {
             file.result = res.data;
           });
-          $log.log('res in uploadImage:', res);
-          $log.log('res.data in uploadImage:', res.data);
           this.image = require('../../assets/' + res.data);
-        }, function(res) {
+          this.editingImage = false;
+        }, (res) => {
           if(res.status > 0) {
             errors.add('Network communication failure trying to add Image');
             $log.error('error in profCtrl.uploadImage', res.status, res.data);
           }
-        }, function(evt) {
+        }, (evt) => {
           file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
         });
       }
