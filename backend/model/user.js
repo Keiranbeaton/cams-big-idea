@@ -10,25 +10,25 @@ const Image = require('./image');
 const createError = require('http-errors');
 
 let userSchema = mongoose.Schema({
-  firstName: {type: String, required: true},
-  lastName: {type: String, required: true},
+  image: {type: mongoose.Schema.Types.ObjectId, ref: 'Image', unique: true},
+  experience: [{type: mongoose.Schema.Types.ObjectId, ref: 'Experience', unique: true}],
+  skills: [{type: mongoose.Schema.Types.ObjectId, ref: 'Skill', unique: true}],
+  education: [{type: mongoose.Schema.Types.ObjectId, ref: 'Education', unique: true}],
   basic: {
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true}
   },
-  image: {type: mongoose.Schema.Types.ObjectId, ref: 'Image', unique: true},
+  firstName: {type: String, required: true},
+  lastName: {type: String, required: true},
   locationCity: {type: String, default: 'City'},
   locationState: {type: String, default: 'State'},
   locationCountry: {type: String, default: 'Country'},
   position: {type: String, default: 'No Position Listed'},
+  role: {type: String, default: 'jobseeker'},
   companyName: String,
   memberSince: String,
-  experience: [{type: mongoose.Schema.Types.ObjectId, ref: 'Experience', unique: true}],
   availability: String,
-  skills: [{type: mongoose.Schema.Types.ObjectId, ref: 'Skill', unique: true}],
-  education: [{type: mongoose.Schema.Types.ObjectId, ref: 'Education', unique: true}],
-  industry: String,
-  role: {type: String, default: 'jobseeker'}
+  industry: String
 });
 
 userSchema.methods.generateHash = function(password) {
@@ -71,7 +71,7 @@ userSchema.methods.addExperience = function(data) {
 userSchema.methods.addEducation = function(data) {
   let result;
   return new Promise((resolve, reject) => {
-    if (!data.school || !data.degree || !data.major || !data.userId) return reject(createError(400, 'Education requires School, degree, major, userId'));
+    if (!data.school || !data.major || !data.userId) return reject(createError(400, 'Education requires School, degree, major, userId'));
     new Education(data).save().then(edu => {
       result = edu;
       this.education.push(edu._id);
@@ -100,6 +100,7 @@ userSchema.methods.addSkill = function(data) {
 userSchema.methods.addImage = function(data) {
   let result;
   return new Promise((resolve, reject) => {
+    console.log('data in user.js:', data);
     if(!data.userId || !data.imageUrl) return reject(createError(400, 'Image requires a url and a userId'));
     new Image(data).save()
       .then(image => {

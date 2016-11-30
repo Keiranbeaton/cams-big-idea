@@ -29,7 +29,6 @@ module.exports = function(app) {
     this.signin = function(user) {
       $http.get(this.baseUrl + '/signin', {headers: {'Authorization': 'Basic ' + $window.btoa(user.email + ':' + user.password)}})
         .then((res) => {
-          $log.log('res.data in authCtrl.signin', res.data);
           auth.setToken(res.data);
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {

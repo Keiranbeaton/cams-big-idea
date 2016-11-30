@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('ProfileController', ['$log', '$http', '$location', 'kbErrors', 'auth', ProfileController]);
+  app.controller('ProfileController', ['$log', '$http', '$location', '$timeout', 'Upload', 'kbErrors', 'auth', ProfileController]);
 
-  function ProfileController($log, $http, $location, errors, auth) {
+  function ProfileController($log, $http, $location, $timeout, ngUpload, errors, auth) {
     this.editingEducation = false;
     this.editingSkills = false;
     this.editingExperience = false;
@@ -18,7 +18,6 @@ module.exports = function(app) {
 
     this.getUser = function() {
       $log.debug('ProfileController.getUser');
-      $log.log('auth:', auth);
       if (auth.currentUser.userId === this.userId) {
         this.ownProfile = true;
       }
@@ -30,7 +29,10 @@ module.exports = function(app) {
         this.experience = this.user.experience;
         if (this.user.image === undefined) {
           this.image = require('../../assets/no-image.svg');
+        } else {
+          this.image = require('../../assets/' + this.user.image.imageUrl);
         }
+
       }, (err) => {
         errors.add(new Error('Network Communication failure in request for User'));
         $log.error('error in ProfileController.getUser:', err);
@@ -138,6 +140,32 @@ module.exports = function(app) {
           errors.add(new Error('Network Communication failure in remove skill request'));
           $log.error('error in ProfileController.removeSkill:', err);
         });
+    };
+
+    this.uploadImage = function(file, errFiles) {
+      $log.debug('ProfileController.addImage');
+      if (file) {
+        file.upload = ngUpload.upload({
+          url: this.baseUrl + '/image/uploads',
+          method: 'POST',
+          data: {file: file, userId: this.user._id}
+        });
+        file.upload.then(function(res) {
+          $timeout(function() {
+            file.result = res.data;
+          });
+          $log.log('res in uploadImage:', res);
+          $log.log('res.data in uploadImage:', res.data);
+          this.image = require('../../assets/' + res.data);
+        }, function(res) {
+          if(res.status > 0) {
+            errors.add('Network communication failure trying to add Image');
+            $log.error('error in profCtrl.uploadImage', res.status, res.data);
+          }
+        }, function(evt) {
+          file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+        });
+      }
     };
   }
 };
