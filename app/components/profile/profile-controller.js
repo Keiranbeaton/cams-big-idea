@@ -56,8 +56,8 @@ module.exports = function(app) {
           if (typeof this.user.availability.end[i] !== String) {
             this.user.availability.end[i] = '25:00';
           }
-          this.editingStart[i] = this.editingStart[i].setHours(this.user.availability.start[i].slice(0, 2), this.user.availability.start[i].slice(3,2));
-          this.editingEnd[i] = this.editingEnd[i].setHours(this.user.availability.end[i].slice(0, 2), this.user.availability.end[i].slice(3, 5));
+          this.editingStart[i] = this.editingStart[i].setHours(this.user.availability.start[i].slice(0, 2), this.user.availability.start[i].slice(3, 2));
+          this.editingEnd[i] = this.editingEnd[i].setHours(this.user.availability.end[i].slice(0, 2), this.user.availability.end[i].slice(3, 2));
           this.availability[i] = {day: this.user.availability.day[i], start: this.startHours[i], end: this.endHours[i], dateStart: this.editingStart[i], dateEnd: this.editingEnd[i]};
         }
         if (this.user.image === undefined) {
