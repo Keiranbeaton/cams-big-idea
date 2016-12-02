@@ -27,9 +27,11 @@ let userSchema = mongoose.Schema({
   role: {type: String, default: 'jobseeker'},
   companyName: String,
   memberSince: String,
-  availabilityDay: Array,
-  availabilityStart: Array,
-  availabilityEnd: Array,
+  availability: {
+    day: {type: Array, default: [false, false, false, false, false, false, false]},
+    start: {type: Array, default: ['25:00', '25:00', '25:00', '25:00', '25:00', '25:00', '25:00']},
+    end: {type: Array, default: ['25:00', '25:00', '25:00', '25:00', '25:00', '25:00', '25:00']}
+  },
   industry: String
 });
 

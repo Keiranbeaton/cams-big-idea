@@ -4,7 +4,6 @@ const createError = require('http-errors');
 const debug = require('debug')('backend:handle-error');
 
 module.exports = function handleError(err, req, res, next) {
-  console.error(err.message);
   if (err.status && err.name) {
     res.status(err.status).send(err.name);
     return next();

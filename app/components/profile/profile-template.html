@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="kb-header-info">
+    <div class="kb-header-info" ng-show="!profCtrl.editing">
       <h2>{{profCtrl.user.firstName}} {{profCtrl.user.lastName}}</h2>
       <h3>{{profCtrl.user.position}}</h3>
       <h4>{{profCtrl.user.companyName}}</h4>
@@ -33,13 +33,13 @@
           <th>Sun</th>
         </tr>
         <tr>
-          <td ng-repeat="day in profCtrl.available"><i class="fa-check" aria-hidden="true" ng-show="{{day}}"></i><i class="fa-times" aria-hidden="true" ng-show="!{{day}}"></i></td>
+          <td ng-repeat="obj in profCtrl.availability"><i class="fa-check" aria-hidden="true" ng-show="obj.day"></i><i class="fa-times" aria-hidden="true" ng-show="!obj.day"></i></td>
         </tr>
         <tr>
-          <td ng-repeat="hour in profCtrl.startHours">{{hour}}</td>
+          <td ng-repeat="obj in profCtrl.availability">{{obj.start}}</td>
         </tr>
         <tr>
-          <td ng-repeat="hour in profCtrl.endHours">{{hour}}</td>
+          <td ng-repeat="obj in profCtrl.availability">{{obj.end}}</td>
         </tr>
       </table>
       <h4>Member Since {{profCtrl.user.memberSince}}</h4>
@@ -56,6 +56,7 @@
       <p>Availability</p>
       <table>
         <tr>
+          <th>Day of the Week</th>
           <th>Mon</th>
           <th>Tue</th>
           <th>Wed</th>
@@ -65,20 +66,27 @@
           <th>Sun</th>
         </tr>
         <tr>
-          <td>
-            <select ng-model="profCtrl.available[0]">
+          <td>Are you available to work this day?</td>
+          <td ng-repeat="obj in profCtrl.availability">
+            <select ng-model="obj.day">
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
           </td>
         </tr>
         <tr>
-          <td ng-repeat="hour in profCtrl.startHours">{{hour}}</td>
+          <td>What time would you like to start?</td>
+          <td ng-repeat="obj in profCtrl.availability">
+            <label for="startHour">Start Time:</label>
+            <input type="time" placeholder="HH:mm:ss" min="00:00:00" max="23:00:00" ng-model="obj.startDate" ng-disabled="!obj.day">
+          </td>
         </tr>
         <tr>
-          <td ng-repeat="hour in profCtrl.endHours">{{hour}}</td>
+          <td ng-repeat="obj in profCtrl.availability">
+            <label for="endHour">End Time:</label>
+            <input type="time" placeholder="HH:mm:ss" min="00:00:00" max="23:00:00" ng-model="obj.endDate" ng-disabled="!obj.day">
+          </td>
         </tr>
-
       </table>
       <label for="locationCity">City:</label>
       <input type="text" name="locationCity" ng-model="profCtrl.user.locationCity">

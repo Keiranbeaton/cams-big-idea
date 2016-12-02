@@ -15,9 +15,25 @@ module.exports = function(app) {
     this.skills = [];
     this.education = [];
     this.experience = [];
+    this.availability = [];
+    this.editingStart = [new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date()];
+    this.editingEnd = this.editingStart;
     this.startHours = [];
     this.endHours = [];
-    this.available = [];
+    let formatDate = function(array1, array2) {
+      array1 = array2.map((date) => {
+        $log.log('date in formatDate', date);
+        if (typeof date !== String) {
+          date = '25:00';
+        }
+        let hour = parseInt(date.slice(0, 2));
+        if (hour === 25) return 'N/A';
+        if (hour === 0) return '12am';
+        if (hour > 0 && hour < 12) return hour + 'am';
+        if (hour === 12) return hour + 'pm';
+        if (hour > 12) return (hour-12) + 'pm';
+      });
+    };
 
     this.getUser = function() {
       $log.debug('ProfileController.getUser');
@@ -30,33 +46,48 @@ module.exports = function(app) {
         this.skills = this.user.skills;
         this.education = this.user.education;
         this.experience = this.user.experience;
-        this.available = this.user.availabilityDay;
-        this.startHours = this.user.availabilityStart.map((num) => {
-          if(num === undefined) return 'N/A';
-          if(num === 0) return '12am';
-          if(num > 0 && num < 12) return num + 'am';
-          if(num === 12) return num + 'pm';
-          if (num > 12) return (num-12) + 'pm';
-        });
-        this.endHours = this.user.availabilityEnd.map((num) => {
-          if(num === undefined) return 'N/A';
-          if(num === 0) return '12am';
-          if(num > 0 && num < 12) return num + 'am';
-          if(num === 12) return num + 'pm';
-          if (num > 12) return (num-12) + 'pm';
-        });
+        formatDate(this.startHours, this.user.availability.start);
+        formatDate(this.endHours, this.user.availability.end);
 
-
+        for (let i = 0; i < 7; i++) {
+          if (typeof this.user.availability.start[i] !== String) {
+            this.user.availability.start[i] = '25:00';
+          }
+          if (typeof this.user.availability.end[i] !== String) {
+            this.user.availability.end[i] = '25:00';
+          }
+          this.editingStart[i] = this.editingStart[i].setHours(this.user.availability.start[i].slice(0, 2), this.user.availability.start[i].slice(3,2));
+          this.editingEnd[i] = this.editingEnd[i].setHours(this.user.availability.end[i].slice(0, 2), this.user.availability.end[i].slice(3, 5));
+          this.availability[i] = {day: this.user.availability.day[i], start: this.startHours[i], end: this.endHours[i], dateStart: this.editingStart[i], dateEnd: this.editingEnd[i]};
+        }
         if (this.user.image === undefined) {
           this.image = require('../../assets/no-image.svg');
         } else {
           this.image = require('../../assets/' + this.user.image.imageUrl);
         }
-
       }, (err) => {
         errors.add(new Error('Network Communication failure in request for User'));
         $log.error('error in ProfileController.getUser:', err);
       });
+    };
+
+    this.updateUser = function() {
+      $log.debug('ProfileController.updateUser');
+      for (let i = 0; i < 7; i++) {
+        this.user.availability[i].day = this.availability[i].day;
+        this.user.availability[i].start = this.availability[i].editingStart.getHours() + ':' + this.availability[i].editingStart.getMinutes();
+        this.user.availability[i].end = this.availability[i].editingEnd.getHours() + ':' + this.availability[i].editingEnd.getMinutes();
+      }
+      formatDate(this.availability.start, this.user.availability.start);
+      formatDate(this.availability.end, this.user.availability.end);
+      $http.put(this.baseUrl + '/users/' + this.userId, this.user, this.config)
+      .then((res) => {
+        $log.debug('res in updateUser:', res);
+        this.editing = false;
+      });
+    }, (err) => {
+      errors.add(new Error('Network Communication failure in profile update request'));
+      $log.error('error in ProfileController.updateUser:', err);
     };
 
     this.deleteUser = function(user) {
@@ -64,21 +95,11 @@ module.exports = function(app) {
       $http.delete(this.baseUrl + '/users/' + user._id, this.config)
       .then((res) => {
         $log.debug('User' + user.firstName + ' ' + user.lastName + ' deleted');
+        $log.debug('Res in delete User:', res);
       }, (err) => {
         errors.add(new Error('Network Communication failure in request to delete User profile'));
         $log.error('error in ProfileController.deleteUser:', err);
       });
-    };
-
-    this.updateUser = function() {
-      $log.debug('ProfileController.updateUser');
-      $http.put(this.baseUrl + '/users/' + this.userId, this.user, this.config)
-      .then((res) => {
-        this.editing = false;
-      });
-    }, (err) => {
-      errors.add(new Error('Network Communication failure in profile update request'));
-      $log.error('error in ProfileController.updateUser:', err);
     };
 
     this.addEducation = function(edu) {

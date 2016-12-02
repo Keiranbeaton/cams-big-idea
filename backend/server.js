@@ -1,4 +1,5 @@
 'use strict';
+
 process.env.APP_SECRET = 'dev';
 
 const morgan = require('morgan');
