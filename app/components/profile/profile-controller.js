@@ -35,7 +35,7 @@ module.exports = function(app) {
         this.experience = this.user.experience;
         this.startHours = this.user.availability.start.map((date) => {
           if (typeof date !== String) {
-            date = '25:00';
+            date = '09:00';
           }
           let hour = parseInt(date.slice(0, 2));
           if (hour === 25) return 'N/A';
@@ -46,7 +46,7 @@ module.exports = function(app) {
         });
         this.endHours = this.user.availability.end.map((date) => {
           if (typeof date !== String) {
-            date = '25:00';
+            date = '17:00';
           }
           let hour = parseInt(date.slice(0, 2));
           if (hour === 25) return 'N/A';
