@@ -36,10 +36,10 @@
           <td ng-repeat="obj in profCtrl.availability"><i class="fa-check" aria-hidden="true" ng-show="obj.day"></i><i class="fa-times" aria-hidden="true" ng-show="!obj.day"></i></td>
         </tr>
         <tr>
-          <td ng-repeat="obj in profCtrl.availability">{{obj.start}}</td>
+          <td ng-repeat="obj in profCtrl.availability" ng-hide="!obj.day">{{obj.start}}</td>
         </tr>
         <tr>
-          <td ng-repeat="obj in profCtrl.availability">{{obj.end}}</td>
+          <td ng-repeat="obj in profCtrl.availability" ng-hide="!obj.day">{{obj.end}}</td>
         </tr>
       </table>
       <h4>Member Since {{profCtrl.user.memberSince}}</h4>
@@ -68,23 +68,27 @@
         <tr>
           <td>Are you available to work this day?</td>
           <td ng-repeat="obj in profCtrl.availability">
-            <select ng-model="obj.day">
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
+            <select ng-model="obj.day" ng-options="opt.value as opt.label for opt in profCtrl.options"></select>
           </td>
         </tr>
         <tr>
-          <td>What time would you like to start?</td>
+          <td>What time would you like to start work?</td>
           <td ng-repeat="obj in profCtrl.availability">
-            <label for="startHour">Start Time:</label>
-            <input type="time" placeholder="HH:mm:ss" min="00:00:00" max="23:00:00" ng-model="obj.startDate" ng-disabled="!obj.day">
+            <div ng-hide="!obj.day">
+              <label for="startHour">Start Time:</label>
+              <input type="time" placeholder="HH:mm" min="00:00" max="23:59" ng-model="obj.dateStart" ng-disabled="!obj.day">
+            </div>
+            <p ng-show="!obj.day">N/A</p>
           </td>
         </tr>
         <tr>
+          <td>What time would you like to finish work by?</td>
           <td ng-repeat="obj in profCtrl.availability">
-            <label for="endHour">End Time:</label>
-            <input type="time" placeholder="HH:mm:ss" min="00:00:00" max="23:00:00" ng-model="obj.endDate" ng-disabled="!obj.day">
+            <div ng-hide="!obj.day">
+              <label for="endHour">End Time:</label>
+              <input type="time" placeholder="HH:mm" min="00:00" max="23:59" ng-model="obj.dateEnd" ng-disabled="!obj.day">
+            </div>
+            <p ng-show="!obj.day">N/A</p>
           </td>
         </tr>
       </table>

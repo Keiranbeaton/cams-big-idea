@@ -4,6 +4,7 @@ module.exports = function(app) {
   app.controller('ProfileController', ['$log', '$http', '$location', '$timeout', 'Upload', 'kbErrors', 'auth', ProfileController]);
 
   function ProfileController($log, $http, $location, $timeout, ngUpload, errors, auth) {
+    this.options = [{value: true, label: 'Yes'}, {value: false, label: 'No'}];
     this.editingEducation = false;
     this.editingSkills = false;
     this.editingExperience = false;
@@ -17,23 +18,9 @@ module.exports = function(app) {
     this.experience = [];
     this.availability = [];
     this.editingStart = [new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date()];
-    this.editingEnd = this.editingStart;
+    this.editingEnd = [new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date()];
     this.startHours = [];
     this.endHours = [];
-    let formatDate = function(array1, array2) {
-      array1 = array2.map((date) => {
-        $log.log('date in formatDate', date);
-        if (typeof date !== String) {
-          date = '25:00';
-        }
-        let hour = parseInt(date.slice(0, 2));
-        if (hour === 25) return 'N/A';
-        if (hour === 0) return '12am';
-        if (hour > 0 && hour < 12) return hour + 'am';
-        if (hour === 12) return hour + 'pm';
-        if (hour > 12) return (hour-12) + 'pm';
-      });
-    };
 
     this.getUser = function() {
       $log.debug('ProfileController.getUser');
@@ -46,19 +33,41 @@ module.exports = function(app) {
         this.skills = this.user.skills;
         this.education = this.user.education;
         this.experience = this.user.experience;
-        formatDate(this.startHours, this.user.availability.start);
-        formatDate(this.endHours, this.user.availability.end);
+        this.startHours = this.user.availability.start.map((date) => {
+          if (typeof date !== String) {
+            date = '25:00';
+          }
+          let hour = parseInt(date.slice(0, 2));
+          if (hour === 25) return 'N/A';
+          if (hour === 0) return '12am';
+          if (hour > 0 && hour < 12) return hour + 'am';
+          if (hour === 12) return hour + 'pm';
+          if (hour > 12) return (hour-12) + 'pm';
+        });
+        this.endHours = this.user.availability.end.map((date) => {
+          if (typeof date !== String) {
+            date = '25:00';
+          }
+          let hour = parseInt(date.slice(0, 2));
+          if (hour === 25) return 'N/A';
+          if (hour === 0) return '12am';
+          if (hour > 0 && hour < 12) return hour + 'am';
+          if (hour === 12) return hour + 'pm';
+          if (hour > 12) return (hour-12) + 'pm';
+        });
 
         for (let i = 0; i < 7; i++) {
           if (typeof this.user.availability.start[i] !== String) {
-            this.user.availability.start[i] = '25:00';
+            this.user.availability.start[i] = '09:00';
           }
           if (typeof this.user.availability.end[i] !== String) {
-            this.user.availability.end[i] = '25:00';
+            this.user.availability.end[i] = '17:00';
           }
-          this.editingStart[i] = this.editingStart[i].setHours(this.user.availability.start[i].slice(0, 2), this.user.availability.start[i].slice(3, 2));
-          this.editingEnd[i] = this.editingEnd[i].setHours(this.user.availability.end[i].slice(0, 2), this.user.availability.end[i].slice(3, 2));
+          this.editingStart[i].setHours(this.user.availability.start[i].slice(0, 2), this.user.availability.start[i].slice(3, 2), 0, 0);
+          this.editingEnd[i].setHours(this.user.availability.end[i].slice(0, 2), this.user.availability.end[i].slice(3, 2), 0, 0);
+          $log.log('editingEnd:', this.editingEnd[i]);
           this.availability[i] = {day: this.user.availability.day[i], start: this.startHours[i], end: this.endHours[i], dateStart: this.editingStart[i], dateEnd: this.editingEnd[i]};
+          $log.log('availability.dateEnd:', this.availability[i].dateEnd);
         }
         if (this.user.image === undefined) {
           this.image = require('../../assets/no-image.svg');
@@ -74,12 +83,37 @@ module.exports = function(app) {
     this.updateUser = function() {
       $log.debug('ProfileController.updateUser');
       for (let i = 0; i < 7; i++) {
-        this.user.availability[i].day = this.availability[i].day;
-        this.user.availability[i].start = this.availability[i].editingStart.getHours() + ':' + this.availability[i].editingStart.getMinutes();
-        this.user.availability[i].end = this.availability[i].editingEnd.getHours() + ':' + this.availability[i].editingEnd.getMinutes();
+        this.user.availability.day[i] = this.availability[i].day;
+        if (this.availability[i].day === false) {
+          this.user.availability.start[i] = '09:00';
+          this.user.availability.end[i] = '17:00';
+        } else {
+          this.user.availability.start[i] = this.availability[i].dateStart.getHours() + ':' + this.availability[i].dateStart.getMinutes();
+          this.user.availability.end[i] = this.availability[i].dateEnd.getHours() + ':' + this.availability[i].dateEnd.getMinutes();
+        }
       }
-      formatDate(this.availability.start, this.user.availability.start);
-      formatDate(this.availability.end, this.user.availability.end);
+      this.availability.start = this.user.availability.start.map((date) => {
+        if (typeof date !== String) {
+          date = '09:00';
+        }
+        let hour = parseInt(date.slice(0, 2));
+        if (hour === 25) return 'N/A';
+        if (hour === 0) return '12am';
+        if (hour > 0 && hour < 12) return hour + 'am';
+        if (hour === 12) return hour + 'pm';
+        if (hour > 12) return (hour-12) + 'pm';
+      });
+      this.availability.end = this.user.availability.end.map((date) => {
+        if (typeof date !== String) {
+          date = '17:00';
+        }
+        let hour = parseInt(date.slice(0, 2));
+        if (hour === 25) return 'N/A';
+        if (hour === 0) return '12am';
+        if (hour > 0 && hour < 12) return hour + 'am';
+        if (hour === 12) return hour + 'pm';
+        if (hour > 12) return (hour-12) + 'pm';
+      });
       $http.put(this.baseUrl + '/users/' + this.userId, this.user, this.config)
       .then((res) => {
         $log.debug('res in updateUser:', res);

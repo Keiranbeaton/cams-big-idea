@@ -1,6 +1,7 @@
 'use strict';
 
 process.env.APP_SECRET = 'dev';
+process.env.MONGODB_URI = 'mongodb://localhost/backenddev';
 
 const morgan = require('morgan');
 const express = require('express');
@@ -20,7 +21,7 @@ const imageRouter = require('./router/image-router');
 
 const app = express();
 const port = process.env.PORT || 3000;
-const mongoDbUri = process.env.MONGODB_URI || 'mongodb://localhost:backenddev';
+const mongoDbUri = process.env.MONGODB_URI || 'mongodb://localhost/backenddev';
 
 mongoose.Promise = Promise;
 mongoose.connect(mongoDbUri);
