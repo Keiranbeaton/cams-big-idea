@@ -36,6 +36,13 @@ module.exports = function(app) {
         });
     };
 
+    this.checkUser = function() {
+      let user = this.getUser();
+      if (user.userName.length > 1) {
+        $location.path('/signout');
+      }
+    };
+
     this.getUser = auth.getUser.bind(auth);
     this.signout = auth.logOut.bind(auth);
     this.currentUser = auth.currentUser;

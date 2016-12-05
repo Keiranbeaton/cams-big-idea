@@ -1,7 +1,9 @@
-<form name="signin" ng-submit="$ctrl.signin($ctrl.user)">
-  <label for="email">Email:</label>
-  <input type="text" required ng-model="$ctrl.user.email">
-  <label for="password">Password:</label>
-  <input type="password" required ng-model="$ctrl.user.password">
-  <button class="btn btn-default" type="submit">Log In</button>
-</form>
+<div ng-init="$ctrl.checkUser()">
+  <form name="signin" ng-submit="$ctrl.signin($ctrl.user)">
+    <label for="email">Email:</label>
+    <input type="text" required ng-model="$ctrl.user.email">
+    <label for="password">Password:</label>
+    <input type="password" required ng-model="$ctrl.user.password">
+    <button class="btn btn-default" type="submit">Log In</button>
+  </form>
+</div>

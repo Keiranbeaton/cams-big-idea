@@ -65,9 +65,7 @@ module.exports = function(app) {
           }
           this.editingStart[i].setHours(this.user.availability.start[i].slice(0, 2), this.user.availability.start[i].slice(3, 2), 0, 0);
           this.editingEnd[i].setHours(this.user.availability.end[i].slice(0, 2), this.user.availability.end[i].slice(3, 2), 0, 0);
-          $log.log('editingEnd:', this.editingEnd[i]);
           this.availability[i] = {day: this.user.availability.day[i], start: this.startHours[i], end: this.endHours[i], dateStart: this.editingStart[i], dateEnd: this.editingEnd[i]};
-          $log.log('availability.dateEnd:', this.availability[i].dateEnd);
         }
         if (this.user.image === undefined) {
           this.image = require('../../assets/no-image.svg');
