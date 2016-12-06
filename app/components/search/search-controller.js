@@ -15,6 +15,7 @@ module.exports = function(app) {
       .then((res) => {
         this.allJobseekers = res.data;
         this.allJobseekers.forEach((user) => {
+          user.thumbnail = require('../../assets/' + user.image.imageUrl);
           if(user.industry === 'Software') this.software.push(user);
           if(user.industry === 'Legal') this.legal.push(user);
         });

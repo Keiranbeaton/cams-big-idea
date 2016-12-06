@@ -11,7 +11,7 @@ const Image = require('../model/image');
 
 let imageRouter = module.exports = exports = Router();
 
-imageRouter.post('/image/uploads', multipartyMiddleware, function(req, res, next){
+imageRouter.post('/uploads', multipartyMiddleware, function(req, res, next){
   debug('POST api/image/uploads');
   let imageData = {};
   let newPath = 'app/assets/' + req.body.userId + '-' + req.files.file.name;
@@ -25,12 +25,12 @@ imageRouter.post('/image/uploads', multipartyMiddleware, function(req, res, next
         user.addImage(imageData)
         .then(() => res.send(req.body.userId + '-' + req.files.file.name))
         .catch(next);
-      }).catch(err => next(createError(404, 'User does not exist')));
+      }).catch(err => next(createError(404, err.message)));
     });
   });
 });
 
-imageRouter.get('/image/:id', function(req, res, next) {
+imageRouter.get('/:id', function(req, res, next) {
   debug('GET /api/image/:id');
   Image.findById(req.params.id)
     .then(img => res.send(img)).catch(err => next(createError(404, err.message)));

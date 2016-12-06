@@ -31,10 +31,10 @@ app.use(cors());
 
 app.use('/api', authRouter);
 app.use('/api/users', userRouter);
-app.use('/api', educationRouter);
-app.use('/api', experienceRouter);
-app.use('/api', skillRouter);
-app.use('/api', imageRouter);
+app.use('/api/education', educationRouter);
+app.use('/api/experience', experienceRouter);
+app.use('/api/skill', skillRouter);
+app.use('/api/image', imageRouter);
 
 app.all('*', function(req, res, next) {
   debug('hit 404 route');
