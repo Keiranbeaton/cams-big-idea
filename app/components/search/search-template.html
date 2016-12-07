@@ -5,26 +5,36 @@
       <option ng-repeat="item in searchCtrl.industryList" value={{item}}>{{item}}</option>
     </select>
   </form>
-  <section ng-if="searchCtrl.searchIndustry==='Legal'">
-    <button type="button" ng-click="searchCtrl.searchIndustry='none'">Search Different Industry</button>
-    <a href="#/profile/{{user._id}}" class="kb-search-user" ng-repeat="user in searchCtrl.legal">
-      <img src="{{user.thumbnail}}"/>
-      <ul>
-        <li>{{user.firstName}} {{user.lastName}}</li>
-        <li>{{user.position}}</li>
-        <li>{{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}}</li>
-      </ul>
-    </a>
-  </section>
-  <section ng-if="searchCtrl.searchIndustry==='Software'">
-    <button type="button" ng-click="searchCtrl.searchIndustry='none'">Search Different Industry</button>
-    <a href="#/profile/{{user._id}}" class="kb-search-user" ng-repeat="user in searchCtrl.software">
-        <img src="{{user.imageUrl}}"/>
+  <button ng-if="searchCtrl.searchIndustry !== 'none'" ng-click="searchCtrl.searchIndustry='none'">Search Different Industry</button>
+  <table>
+    <tr>
+      <th> </th>
+      <th> Name </th>
+      <th> Position </th>
+      <th> Location </th>
+      <th> Skills/Area of Expertise </th>
+    </tr>
+    <tr ng-if="searchCtrl.searchIndustry==='Legal'" ng-repeat="user in searchCtrl.legal">
+      <td><img src="{{user.thumbnail}}"></td>
+      <td>{{user.firstName}} {{user.lastName}}</td>
+      <td> {{user.position}} </td>
+      <td> {{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}}</td>
+      <td>
         <ul>
-          <li>{{user.firstName}} {{user.lastName}}</li>
-          <li>{{user.position}}</li>
-          <li>{{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}}</li>
+          <li ng-repeat="skill in user.skills"> {{skill.content}} </li>
         </ul>
-    </a>
-  </section>
+      </td>
+    </tr>
+    <tr ng-if="searchCtrl.searchIndustry==='Software'" ng-repeat="user in searchCtrl.software">
+      <td><img src="{{user.thumbnail}}"></td>
+      <td>{{user.firstName}} {{user.lastName}}</td>
+      <td> {{user.position}} </td>
+      <td> {{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}}</td>
+      <td>
+        <ul>
+          <li ng-repeat="skill in user.skills"> {{skill.content}} </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
 </div>
