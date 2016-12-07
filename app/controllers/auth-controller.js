@@ -2,6 +2,7 @@
 
 module.exports = function(app) {
   app.controller('AuthController', ['$http', '$location', '$window', '$log', 'auth', function($http, $location, $window, $log, auth) {
+    this.wrongPassword = false;
     this.signupUser = function(user) {
       $log.log('AuthController.signupUser');
       user.role = 'jobseeker';
@@ -11,6 +12,7 @@ module.exports = function(app) {
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signup: ' + err);
+          this.wrongPassword = true;
         });
     };
 
@@ -23,6 +25,7 @@ module.exports = function(app) {
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signupCompany: ' + err);
+          this.wrongPassword = true;
         });
     };
 
@@ -33,12 +36,14 @@ module.exports = function(app) {
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signin: ' + err);
+          this.wrongPassword = true;
         });
     };
 
     this.checkUser = function() {
       let user = this.getUser();
-      if (user.userName.length > 1) {
+      $log.log('user in checkUser', user);
+      if (user.username !== false) {
         $location.path('/signout');
       }
     };

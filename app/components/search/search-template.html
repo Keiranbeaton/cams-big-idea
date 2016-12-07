@@ -6,7 +6,7 @@
     </select>
   </form>
   <button ng-if="searchCtrl.searchIndustry !== 'none'" ng-click="searchCtrl.searchIndustry='none'">Search Different Industry</button>
-  <table>
+  <table ng-if="searchCtrl.searchIndustry !== 'none'">
     <tr>
       <th> </th>
       <th> Name </th>

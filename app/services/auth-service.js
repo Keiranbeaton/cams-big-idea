@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-  app.factory('auth', ['$window', 'jwtHelper', '$location', function($window, jwt, $location) {
+  app.factory('auth', ['$window', 'jwtHelper', '$location', '$log', function($window, jwt, $location, $log) {
     return {
       currentUser: {},
       getToken: function(options) {
@@ -21,16 +21,22 @@ module.exports = function(app) {
       },
       getUser: function() {
         let token = this.getToken();
-        if (!token) return;
+        $log.log('this.currentUser in getUser', this.currentUser);
+        if (!token) {
+          this.currentUser.username = false;
+          this.currentUser.userId = false;
+          return this.currentUser;
+        }
         let decoded = jwt.decodeToken(token);
+        $log.log('decoded', decoded);
         this.currentUser.username = decoded.idd;
         return this.currentUser;
       },
       logOut: function() {
         $window.localStorage.token = '';
         $window.localStorage.username = '';
-        this.currentUser.userId = '';
-        this.currentUser.userName = '';
+        this.currentUser.userId = false;
+        this.currentUser.username = false;
         this.token = '';
         $location.path('/home');
       }
