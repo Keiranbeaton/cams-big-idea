@@ -3,12 +3,15 @@
 module.exports = function(app) {
   app.controller('AuthController', ['$http', '$location', '$window', '$log', 'auth', function($http, $location, $window, $log, auth) {
     this.wrongPassword = false;
+    this.currentUser = {userId: false, username: false};
+
     this.signupUser = function(user) {
       $log.log('AuthController.signupUser');
       user.role = 'jobseeker';
       $http.post(this.baseUrl + '/signup', user)
         .then((res) => {
           auth.setToken(res.data);
+          this.currentUser = auth.currentUser;
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signup: ' + err);
@@ -22,6 +25,7 @@ module.exports = function(app) {
       $http.post(this.baseUrl + 'signup', company)
         .then((res) => {
           auth.setToken(res.data);
+          this.currentUser = auth.currentUser;
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signupCompany: ' + err);
@@ -33,6 +37,7 @@ module.exports = function(app) {
       $http.get(this.baseUrl + '/signin', {headers: {'Authorization': 'Basic ' + $window.btoa(user.email + ':' + user.password)}})
         .then((res) => {
           auth.setToken(res.data);
+          this.currentUser = auth.currentUser;
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signin: ' + err);
@@ -40,16 +45,22 @@ module.exports = function(app) {
         });
     };
 
+    this.signout = function() {
+      auth.logOut();
+      this.currentUser = auth.currentUser;
+    };
+
     this.checkUser = function() {
       let user = this.getUser();
       $log.log('user in checkUser', user);
       if (user.username !== false) {
+        $log.log('hit if block in checkUser');
         $location.path('/signout');
       }
     };
 
+
     this.getUser = auth.getUser.bind(auth);
     this.signout = auth.logOut.bind(auth);
-    this.currentUser = auth.currentUser;
   }]);
 };
