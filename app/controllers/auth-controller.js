@@ -15,7 +15,6 @@ module.exports = function(app) {
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signup: ', err);
-          this.wrongPassword = true;
         });
     };
 
@@ -29,7 +28,6 @@ module.exports = function(app) {
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signupCompany: ' + err);
-          this.wrongPassword = true;
         });
     };
 

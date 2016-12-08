@@ -8,7 +8,7 @@ mongoose.Promise = Promise;
 let educationSchema = mongoose.Schema({
   userId: {type: mongoose.Schema.Types.ObjectId, require: true},
   school: {type: String, required: true},
-  major: {type:String, required: true},
+  major: {type: String, required: true},
   degree: String,
   start: String,
   finish: String,
