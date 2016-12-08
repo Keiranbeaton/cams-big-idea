@@ -17,8 +17,8 @@ educationRouter.post('/', jsonParser, function(req, res, next) {
     .then(user => {
       user.addEducation(req.body)
         .then(edu => res.json(edu))
-        .catch(next);
-    }).catch(err => next(createError(404, err.message)));
+        .catch(next(createError(400, 'School name is required')));
+    }).catch(err => next(createError(400, 'User not found')));
 });
 
 educationRouter.get('/', function(req, res, next) {

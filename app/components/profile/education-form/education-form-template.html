@@ -1,7 +1,7 @@
 <form class="form-inline" novalidate ng-submit="eduCtrl.saveAndNull(eduCtrl.education)">
   <div class="form-group">
     <label for="school">School:</label>
-    <input type="text" name="school" ng-model="eduCtrl.education.school">
+    <input type="text" name="school" ng-model="eduCtrl.education.school" required>
   </div>
   <div class="form-group">
     <label for="degree">Degree:</label>
@@ -9,7 +9,7 @@
   </div>
   <div class="form-group">
     <label for="major">Major:</label>
-    <input type="text" name="major" ng-model="eduCtrl.education.major">
+    <input type="text" name="major" ng-model="eduCtrl.education.major" required>
   </div>
   <div class="form-group">
     <label for="start">Start Year:</label>

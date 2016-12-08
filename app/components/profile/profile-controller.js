@@ -136,7 +136,7 @@ module.exports = function(app) {
 
     this.addEducation = function(edu) {
       $log.debug('ProfileController.addEducation');
-      edu.userId = this.user._id;
+      edu.industry = this.user.industry;
       $http.post(this.baseUrl + '/education', edu, this.config)
         .then((res) => {
           $log.log('Successfully added education', res.data);
@@ -190,7 +190,6 @@ module.exports = function(app) {
 
     this.addSkill = function(skill) {
       $log.debug('ProfileController.addSkill');
-      skill.userId = this.user._id;
       $http.post(this.baseUrl + '/skill', skill, this.config)
         .then((res) => {
           $log.log('Successfully added skill', res.data);

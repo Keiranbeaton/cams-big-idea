@@ -1,7 +1,7 @@
 <form class="form-inline" novalidate ng-submit="sfCtrl.saveAndNull(sfCtrl.skill)">
   <div class="form-group">
     <label for="content">Skill/Area of Expertise:</label>
-    <input type="text" name="content" ng-model="sfCtrl.skill.content">
+    <input type="text" name="content" ng-model="sfCtrl.skill.content" required>
   </div>
   <button type="submit" class="btn btn-default">Add Skill:</button>
   <ng-transclude></ng-transclude>

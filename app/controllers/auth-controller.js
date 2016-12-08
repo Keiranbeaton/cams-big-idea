@@ -14,7 +14,7 @@ module.exports = function(app) {
           this.currentUser = auth.currentUser;
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
-          $log.error('error in AuthController.signup: ' + err);
+          $log.error('error in AuthController.signup: ', err);
           this.wrongPassword = true;
         });
     };
@@ -52,10 +52,15 @@ module.exports = function(app) {
 
     this.checkUser = function() {
       let user = this.getUser();
-      $log.log('user in checkUser', user);
       if (user.username !== false) {
-        $log.log('hit if block in checkUser');
         $location.path('/signout');
+      }
+    };
+
+    this.checkNoUser = function() {
+      let user = this.getUser();
+      if (user.username === false) {
+        $location.path('/signin');
       }
     };
 

@@ -22,7 +22,9 @@ authRouter.post('/signup', jsonParser, (req, res, next) => {
   newUser.industry = req.body.industry;
   newUser.generateHash(req.body.password)
     .then((tokenData) => {
+      console.log('inside then block after generateHash');
       newUser.save().then((userReturn) => {
+        console.log('inside then block after newUser.save()');
         tokenData.username = userReturn.basic.email;
         tokenData.userId = userReturn._id;
         res.json(tokenData);
