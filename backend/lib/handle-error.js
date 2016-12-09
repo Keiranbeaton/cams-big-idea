@@ -1,7 +1,7 @@
 'use strict';
 
 const createError = require('http-errors');
-const debug = require('debug')('backend:handle-error');
+const debug = require('debug')('handleError');
 
 module.exports = function handleError(err, req, res, next) {
   if (err.status && err.name) {

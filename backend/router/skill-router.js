@@ -3,7 +3,7 @@
 const Router = require('express').Router;
 const createError = require('http-errors');
 const jsonParser = require('body-parser').json();
-const debug = require('debug')('skill:skill-router');
+const debug = require('debug')('skillRouter');
 
 const Skill = require('../model/skill');
 const User = require('../model/user');

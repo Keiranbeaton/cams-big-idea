@@ -18,7 +18,6 @@ module.exports = function(app) {
         this.userId = tokenData.userId;
         this.currentUser.userId = tokenData.userId;
         this.getUser();
-        $window.localStorage.username = this.currentUser.username;
         return tokenData.token;
       },
       getUser: function() {
@@ -36,7 +35,6 @@ module.exports = function(app) {
       logOut: function() {
         $log.log('authService.logOut');
         $window.localStorage.token = '';
-        $window.localStorage.username = '';
         this.currentUser.userId = false;
         this.currentUser.username = false;
         this.token = '';

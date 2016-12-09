@@ -8,7 +8,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
 const createError = require('http-errors');
-const debug = require('debug')('backend:server');
+const debug = require('debug')('server');
 const cors = require('cors');
 
 const handleError = require('./lib/handle-error');

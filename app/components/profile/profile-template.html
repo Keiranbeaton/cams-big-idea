@@ -1,6 +1,7 @@
 <div class="kb-profile" ng-init="profCtrl.getUser()">
   <section class="kb-prof-header">
     <button type="button" ng-if="profCtrl.ownProfile" ng-show="!profCtrl.editing" ng-click="profCtrl.editing=true"> Edit Profile </button>
+    <button type="button" ng-if="profCtrl.ownProfile" ng-show="profCtrl.editing" ng-click="profCtrl.deleteUser(profCtrl.user)"> Delete User </button>
     <div>
       <img src="{{profCtrl.image}}">
       <button ng-click="profCtrl.editingImage=true" ng-hide="!profCtrl.editing" ng-show="!profCtrl.editingImage"> Add/Update Image </button>

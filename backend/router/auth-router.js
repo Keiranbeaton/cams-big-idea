@@ -8,10 +8,12 @@ const BasicHTTP = require('../lib/basic-http');
 const authzn = require('../lib/authorization');
 const jwtAuth = require('../lib/jwt-auth');
 const ErrorHandler = require('../lib/error-handler');
+const debug = require('debug')('authRouter');
 
 let authRouter = module.exports = exports = Router();
 
 authRouter.post('/signup', jsonParser, (req, res, next) => {
+  debug('POST api/signup');
   let newUser = new User();
   let currentDate = new Date();
   newUser.memberSince = (currentDate.getMonth() + 1) + '/' + currentDate.getDate() + '/' + currentDate.getFullYear();
@@ -22,9 +24,7 @@ authRouter.post('/signup', jsonParser, (req, res, next) => {
   newUser.industry = req.body.industry;
   newUser.generateHash(req.body.password)
     .then((tokenData) => {
-      console.log('inside then block after generateHash');
       newUser.save().then((userReturn) => {
-        console.log('inside then block after newUser.save()');
         tokenData.username = userReturn.basic.email;
         tokenData.userId = userReturn._id;
         res.json(tokenData);
@@ -33,6 +33,7 @@ authRouter.post('/signup', jsonParser, (req, res, next) => {
 });
 
 authRouter.get('/signin', BasicHTTP, (req, res, next) => {
+  debug('GET /api/signin');
   User.findOne({'basic.email': req.auth.email})
     .then((user) => {
       if (!user) return next(createError(404, 'User not found'));

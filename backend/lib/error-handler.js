@@ -1,6 +1,6 @@
 'use strict';
 
-const errorMsg = require('debug')('backend:error');
+const errorMsg = require('debug')('error');
 
 module.exports = exports = function(statusCode, cb, message) {
   return function(error) {

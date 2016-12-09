@@ -10,10 +10,10 @@ const Image = require('./image');
 const createError = require('http-errors');
 
 let userSchema = mongoose.Schema({
-  image: {type: mongoose.Schema.Types.ObjectId, ref: 'Image', unique: true},
-  experience: [{type: mongoose.Schema.Types.ObjectId, ref: 'Experience', unique: true}],
-  skills: [{type: mongoose.Schema.Types.ObjectId, ref: 'Skill', unique: true}],
-  education: [{type: mongoose.Schema.Types.ObjectId, ref: 'Education', unique: true}],
+  image: {type: mongoose.Schema.Types.ObjectId, ref: 'Image'},
+  experience: [{type: mongoose.Schema.Types.ObjectId, ref: 'Experience'}],
+  skills: [{type: mongoose.Schema.Types.ObjectId, ref: 'Skill'}],
+  education: [{type: mongoose.Schema.Types.ObjectId, ref: 'Education'}],
   basic: {
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true}

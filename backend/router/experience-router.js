@@ -3,7 +3,7 @@
 const Router = require('express').Router;
 const createError = require('http-errors');
 const jsonParser = require('body-parser').json();
-const debug = require('debug')('experience:experience-router');
+const debug = require('debug')('experienceRouter');
 
 const Experience = require('../model/experience');
 const User = require('../model/user');
