@@ -15,9 +15,15 @@ educationRouter.post('/', jsonParser, function(req, res, next) {
   let data = req.body;
   User.findById(data.userId)
     .then(user => {
+      console.log('Hit User.findById.then');
+      console.log('user: ', user);
       user.addEducation(req.body)
-        .then(edu => res.json(edu))
-        .catch(next(createError(400, 'School name is required')));
+        .then((edu) => {
+          console.log('Hit user.addEducation.then');
+          console.log('edu: ', edu);
+          res.json(edu);
+        })
+        .catch(next);
     }).catch(err => next(createError(400, 'User not found')));
 });
 
