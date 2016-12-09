@@ -10,7 +10,7 @@ module.exports = (app) => {
       scope: {
         baseUrl: '@',
         config: '@',
-        industryList: '@'
+        industryList: '='
       }
     };
   });

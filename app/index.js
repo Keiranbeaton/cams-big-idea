@@ -6,7 +6,8 @@ require('./scss/base.scss');
 const angular = require('angular');
 const angularRoute = require('angular-route');
 const angularJWT = require('angular-jwt');
-const camApp = angular.module('camApp', [angularRoute, angularJWT]);
+const ngFileUpload = require('ng-file-upload');
+const camApp = angular.module('camApp', [angularRoute, angularJWT, ngFileUpload]);
 
 camApp.run(['$rootScope', ($rs) => {
   $rs.baseUrl = `${__API_URL__}/api`;
@@ -27,8 +28,20 @@ camApp.config(['$routeProvider', ($rp) => {
   .when('/search', {
     template: require('./html/search.html')
   })
-  .when('/signup', {
-    template: require('./html/signup.html')
+  .when('/signup/user', {
+    template: require('./html/signup-user.html')
+  })
+  .when('/signup/company', {
+    template: require('./html/signup-company.html')
+  })
+  .when('/signin', {
+    template: require('./html/signin.html')
+  })
+  .when('/signout', {
+    template: require('./html/signout.html')
+  })
+  .when('/profile/:id', {
+    template: require('./html/profile.html')
   })
   .otherwise({
     redirectTo: 'home'

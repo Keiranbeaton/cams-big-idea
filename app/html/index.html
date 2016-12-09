@@ -8,15 +8,16 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-default" ng-controller="NavController as NavCtrl">
+      <nav class="navbar navbar-default">
         <div class="container">
           <div class="navbar-header">
             <a class="navbar-brand" href="#/home">Cam's Big Idea</a>
           </div>
           <ul class="nav nav-pills navbar-right">
+            <li><a href="#/home"> Home </a></li>
             <li><a href="#/search"> Find A Professional </a></li>
-            <li><a href="#/signup"><i></i> Apply as Professional </a></li>
-            <li><a href="#/signin"> Login </a></li>
+            <li><a href="#/signup/user"><i></i> Apply as Professional </a></li>
+            <li><a href="#/signin"> Log in/Log Out </a></li>
           </ul>
         </div>
       </nav>
@@ -34,12 +35,12 @@
       </div>
     </header>
     <main ng-view></main>
-    <footer>
+    <!-- <footer>
       <nav class="navbar navbar-default">
         <div class="container">
           <p class="pull-left"> &copy; 2016 Keiran Beaton</p>
         </div>
       </nav>
-    </footer>
+    </footer> -->
   </body>
 </html>
