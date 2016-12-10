@@ -1,6 +1,20 @@
 @import "vendors/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 @import "vendors/font-awesome-4.6.3/scss/font-awesome.scss";
-
 @import "themes";
+
+
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 50px;
+  min-height: 100%;
+  font-size: 12px;
+}
+
 @import "header-footer";
-@import "home";
+// @import "home";
+@import "profile";
