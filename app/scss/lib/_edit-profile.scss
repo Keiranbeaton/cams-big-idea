@@ -1,0 +1,31 @@
+div.kb-update-group {
+  display: block;
+  width: 100%;
+  > label {
+    margin-right: 5px;
+    width: 35%;
+  }
+}
+
+table.kb-form-table {
+  width: 100%;
+  > tbody {
+    width: 100%;
+  }
+  tr {
+    width: 100%;
+    padding-bottom: 5px;
+  }
+}
+
+td.kb-centered {
+  text-align: center;
+}
+
+.kb-update-form {
+  width: 100%;
+}
+
+th.kb-label {
+  text-align: left;
+}

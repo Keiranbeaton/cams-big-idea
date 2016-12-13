@@ -1,16 +1,26 @@
 <div ng-init='$ctrl.checkUser()'>
-  <form name="signup-user" ng-submit="$ctrl.signupUser($ctrl.user)">
-    <label for="firstName">First Name:</label>
-    <input type="text" required ng-model="$ctrl.user.firstName">
-    <label for="lastName">Last Name:</label>
-    <input type="text" required ng-model="$ctrl.user.lastName">
-    <label for="email">Email:</label>
-    <input type="email" required ng-model="$ctrl.user.email">
+  <form class="kb-signup" name="signup-user" ng-submit="$ctrl.signupUser($ctrl.user)">
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" required ng-model="$ctrl.user.firstName">
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input type="text" required ng-model="$ctrl.user.lastName">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" required ng-model="$ctrl.user.email">
+    </div>
     <p ng-if="$ctrl.user.password !== $ctrl.user.passwordConfirm">Password does not match</p>
-    <label for="password">Password:</label>
-    <input type="password" required ng-model="$ctrl.user.password">
-    <label for="password-confirm">Confirm Password:</label>
-    <input type="password" required ng-model="$ctrl.user.passwordConfirm">
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" required ng-model="$ctrl.user.password">
+    </div>
+    <div class="form-group">
+      <label for="password-confirm">Confirm Password:</label>
+      <input type="password" required ng-model="$ctrl.user.passwordConfirm">
+    </div>
     <p ng-if="$ctrl.user.industry === undefined"> Choose Your Industry: </p>
     <select ng-model="$ctrl.user.industry" required>
       <option ng-repeat="industry in $ctrl.industryList" value="{{industry}}"> {{industry}} </option>

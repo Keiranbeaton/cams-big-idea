@@ -1,0 +1,96 @@
+div.kb-profile {
+  width: 100%;
+  h2 {
+    font-size: 20px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+  h4 {
+    font-size: 14px;
+  }
+}
+
+div.kb-header-img {
+  width: 38%;
+  height: 38%;
+  display: inline-block;
+  vertical-align: top;
+  > img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+div.kb-header-info {
+  display: inline-block;
+  width: 60%;
+  > h2 {
+    margin-top: 0;
+  }
+  > h3 {
+    margin-top: 0;
+  }
+  > h4 {
+    margin-top: 0;
+  }
+}
+
+div.kb-header-avail {
+  padding: 10px;
+  > h4 {
+    margin-top: 5px;
+  }
+}
+
+th {
+  text-align: center;
+}
+
+section.kb-prof-list {
+  width: 100%;
+  padding: 10px;
+  > ul {
+    list-style-type: none;
+  }
+}
+
+section.kb-prof-skill {
+  li {
+    display: inline-block;
+    border: solid thin black;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  p {
+    margin-bottom: 0;
+  }
+}
+
+section.kb-prof-experience {
+
+}
+
+@media (min-width: 768px) {
+  div.kb-profile {
+    h2 {
+      font-size: 30px;
+    }
+    h3 {
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 21px;
+    }
+  }
+
+  div.kb-header-avail {
+    table {
+      width: 75%;
+      text-align: center;
+    }
+  }
+}
