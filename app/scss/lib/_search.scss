@@ -42,3 +42,27 @@ p.kb-location {
 ul.kb-skill {
   width: 150px;
 }
+
+@media (min-width: 768px) {
+  table.kb-search {
+    min-width: 100%;
+  }
+  div.kb-search {
+    h4 {
+      font-size: 30px;
+    }
+  }
+  p.kb-name {
+    font-size: 16px;
+  }
+  p.kb-position {
+    font-size: 16px;
+  }
+  p.kb-location {
+    font-size: 16px;
+  }
+  ul.kb-skill {
+    font-size: 16px;
+    width: 200px;
+  }
+}

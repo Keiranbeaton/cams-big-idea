@@ -1,5 +1,14 @@
 div.kb-profile {
   width: 100%;
+  h2 {
+    font-size: 20px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+  h4 {
+    font-size: 14px;
+  }
 }
 
 div.kb-header-img {
@@ -18,15 +27,12 @@ div.kb-header-info {
   width: 60%;
   > h2 {
     margin-top: 0;
-    font-size: 20px;
   }
   > h3 {
     margin-top: 0;
-    font-size: 16px;
   }
   > h4 {
     margin-top: 0;
-    font-size: 14px;
   }
 }
 
@@ -34,11 +40,6 @@ div.kb-header-avail {
   padding: 10px;
   > h4 {
     margin-top: 5px;
-    font-size: 14px;
-  }
-  > table {
-    width: 100%;
-    text-align: center;
   }
 }
 
@@ -49,9 +50,6 @@ th {
 section.kb-prof-list {
   width: 100%;
   padding: 10px;
-  > h4 {
-    font-size: 14px;
-  }
   > ul {
     list-style-type: none;
   }
@@ -74,4 +72,25 @@ section.kb-prof-skill {
 
 section.kb-prof-experience {
 
+}
+
+@media (min-width: 768px) {
+  div.kb-profile {
+    h2 {
+      font-size: 30px;
+    }
+    h3 {
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 21px;
+    }
+  }
+
+  div.kb-header-avail {
+    table {
+      width: 75%;
+      text-align: center;
+    }
+  }
 }

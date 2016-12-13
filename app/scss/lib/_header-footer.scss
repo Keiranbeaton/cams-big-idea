@@ -40,3 +40,9 @@ footer {
     min-height: 0px;
   }
 }
+
+@media (min-width: 768px) {
+  .kb-link {
+    width:24%;
+  }
+}

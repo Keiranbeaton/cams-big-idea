@@ -16,7 +16,7 @@
         <th> Skills/Area of Expertise </th>
       </tr>
       <tr ng-if="searchCtrl.searchIndustry==='Legal'" ng-repeat="user in searchCtrl.legal">
-        <td><img class="kb-search" src="{{user.thumbnail}}"></td>
+        <td><a href="#/profile/{{user._id}}"><img class="kb-search" src="{{user.thumbnail}}"></a></td>
         <td><p class="kb-name"> {{user.firstName}} {{user.lastName}} </p></td>
         <td><p class="kb-position"> {{user.position}} </p></td>
         <td><p class="kb-location"> {{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}}</p></td>
@@ -27,7 +27,7 @@
         </td>
       </tr>
       <tr ng-if="searchCtrl.searchIndustry==='Software'" ng-repeat="user in searchCtrl.software">
-        <td><img class="kb-search" src="{{user.thumbnail}}"></td>
+        <td><a href="#/profile/{{user._id}}"><img class="kb-search" src="{{user.thumbnail}}"></a></td>
         <td><p class="kb-name"> {{user.firstName}} {{user.lastName}} </p></td>
         <td><p class="kb-position"> {{user.position}} </p></td>
         <td><p class="kb-location"> {{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}}</p></td>
