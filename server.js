@@ -23,6 +23,8 @@ const mongoDbUri = process.env.MONGODB_URI || 'mongodb://localhost/backenddev';
 mongoose.Promise = Promise;
 mongoose.connect(mongoDbUri);
 
+app.use(expres.static(`${__dirname}/build`))
+
 app.use(morgan('dev'));
 app.use(cors());
 
