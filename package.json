@@ -1,10 +1,6 @@
 {
   "name": "cams-big-idea",
   "version": "1.0.0",
-  "engines":{
-    "node": "4.4.7",
-    "npm": "3.10.6"
-  },
   "description": "practice work",
   "main": "index.js",
   "scripts": {

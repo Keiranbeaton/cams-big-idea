@@ -20,6 +20,10 @@ camApp.run(['$rootScope', ($rs) => {
   $rs.industryList = ['Software', 'Legal'];
 }]);
 
+require('./services')(camApp);
+require('./controllers')(camApp);
+require('./components')(camApp);
+
 camApp.config(['$routeProvider', ($rp) => {
   $rp
   .when('/home', {
@@ -47,7 +51,3 @@ camApp.config(['$routeProvider', ($rp) => {
     redirectTo: 'home'
   });
 }]);
-
-require('./services')(camApp);
-require('./controllers')(camApp);
-require('./components')(camApp);

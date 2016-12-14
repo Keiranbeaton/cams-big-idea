@@ -2,6 +2,7 @@
 
 const morgan = require('morgan');
 const express = require('express');
+const app = express();
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
 const createError = require('http-errors');
@@ -16,7 +17,6 @@ const experienceRouter = require('./backend/router/experience-router');
 const skillRouter = require('./backend/router/skill-router');
 const imageRouter = require('./backend/router/image-router');
 
-const app = express();
 const port = process.env.PORT || 3000;
 const mongoDbUri = process.env.MONGODB_URI || 'mongodb://localhost/backenddev';
 
