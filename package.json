@@ -6,7 +6,7 @@
     "npm": "3.10.6"
   },
   "description": "practice work",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "watch": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "start": "node server.js",
