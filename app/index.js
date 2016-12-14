@@ -35,9 +35,6 @@ camApp.config(['$routeProvider', ($rp) => {
   .when('/signup/user', {
     template: require('./html/signup-user.html')
   })
-  .when('/signup/company', {
-    template: require('./html/signup-company.html')
-  })
   .when('/signin', {
     template: require('./html/signin.html')
   })
@@ -48,6 +45,6 @@ camApp.config(['$routeProvider', ($rp) => {
     template: require('./html/profile.html')
   })
   .otherwise({
-    redirectTo: 'home'
+    redirectTo: '/home'
   });
 }]);
