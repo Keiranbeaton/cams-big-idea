@@ -8,13 +8,13 @@ const createError = require('http-errors');
 const debug = require('debug')('server');
 const cors = require('cors');
 
-const handleError = require('./lib/handle-error');
-const authRouter = require('./router/auth-router');
-const userRouter = require('./router/user-router');
-const educationRouter = require('./router/education-router');
-const experienceRouter = require('./router/experience-router');
-const skillRouter = require('./router/skill-router');
-const imageRouter = require('./router/image-router');
+const handleError = require('./backend/lib/handle-error');
+const authRouter = require('./backend/router/auth-router');
+const userRouter = require('./backend/router/user-router');
+const educationRouter = require('./backend/router/education-router');
+const experienceRouter = require('./backend/router/experience-router');
+const skillRouter = require('./backend/router/skill-router');
+const imageRouter = require('./backend/router/image-router');
 
 const app = express();
 const port = process.env.PORT || 3000;
