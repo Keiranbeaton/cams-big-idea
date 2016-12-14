@@ -14,7 +14,7 @@ var plugins = [
 ];
 
 module.exports = {
-  entry: `${__dirname}/app`,
+  entry: `${__dirname}/app/index.js`,
   plugins: plugins,
   output: {
     path: 'build',
