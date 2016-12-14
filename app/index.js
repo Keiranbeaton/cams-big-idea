@@ -24,7 +24,8 @@ require('./services')(camApp);
 require('./controllers')(camApp);
 require('./components')(camApp);
 
-camApp.config(['$routeProvider', ($rp) => {
+camApp.config(['$routeProvider', '$locationProvider', ($rp, $lp) => {
+  $lp.hashPrefix('');
   $rp
   .when('/home', {
     template: require('./html/home.html')
