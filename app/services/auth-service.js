@@ -1,18 +1,15 @@
 'use strict';
 
 module.exports = function(app) {
-  app.factory('auth', ['$window', 'jwtHelper', '$location', '$log', function($window, jwt, $location, $log) {
+  app.factory('auth', ['$window', 'jwtHelper', '$location', function($window, jwt, $location) {
     return {
       currentUser: {},
       getToken: function(options) {
-        $log.log('authService.getToken');
         options = options || {};
         if(this.token) return this.token;
         if($window.localStorage.token) return this.setToken($window.localStorage);
-        // if(!options.noRedirect) $location.path('/signup/user');
       },
       setToken: function(tokenData) {
-        $log.log('authService.setToken');
         $window.localStorage.token = tokenData.token;
         this.token = tokenData.token;
         this.userId = tokenData.userId;
@@ -21,7 +18,6 @@ module.exports = function(app) {
         return tokenData.token;
       },
       getUser: function() {
-        $log.log('authService.getUser');
         let token = this.getToken();
         if (!token) {
           this.currentUser.username = false;
@@ -33,7 +29,6 @@ module.exports = function(app) {
         return this.currentUser;
       },
       logOut: function() {
-        $log.log('authService.logOut');
         $window.localStorage.token = '';
         this.currentUser.userId = false;
         this.currentUser.username = false;
