@@ -16,13 +16,6 @@ userRouter.get('/', (req, res, next) => {
   User.find().populate('skills education experience image').then((users) => {res.send(users);}).catch(next);
 });
 
-userRouter.get('/jobseekers', (req, res, next) => {
-  debug('GET /api/users/jobseekers');
-  User.find({'role': 'jobseeker'}).populate('skills education experience image').then((users) => {
-    res.send(users);
-  }).catch(next);
-});
-
 userRouter.get('/:id', (req, res, next) => {
   debug('GET /api/users/:id');
   User.findById(req.params.id).populate('skills education experience image').then((user) => {res.send(user);}).catch((err) => {next(createError(404, err.message));});

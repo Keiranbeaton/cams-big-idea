@@ -33,6 +33,18 @@ module.exports = function(app) {
         this.skills = this.user.skills;
         this.education = this.user.education;
         this.experience = this.user.experience;
+        if (this.user.image === undefined) {
+          this.image = require('../../assets/no-img.png');
+        } else {
+          let binary = '';
+          let bytes = new Uint8Array(this.user.image.data.data);
+          for (let i = 0; i < bytes.byteLength; i++) {
+            binary += String.fromCharCode(bytes[i]);
+          }
+          let formattedImageData = window.btoa(binary);
+          this.image = 'data:' + this.user.image.contentType + ';base64,' + formattedImageData;
+        }
+        this.user.image = this.user.image._id;
         this.startHours = this.user.availability.start.map((date) => {
           let startArray = date.split(':');
           let hour = parseInt(startArray[0]);
@@ -79,11 +91,6 @@ module.exports = function(app) {
           this.editingEnd[i].setHours(endArray[0], endArray[1], 0, 0);
           this.availability[i] = {day: this.user.availability.day[i], start: this.startHours[i], end: this.endHours[i], dateStart: this.editingStart[i], dateEnd: this.editingEnd[i]};
         }
-        if (this.user.image === undefined) {
-          this.image = require('../../assets/no-image.svg');
-        } else {
-          this.image = require('../../assets/' + this.user.image.imageUrl);
-        }
       }, (err) => {
         errors.add(new Error('Network Communication failure in request for User'));
         $log.error('error in ProfileController.getUser:', err);
@@ -104,7 +111,6 @@ module.exports = function(app) {
       }
       $http.put(this.baseUrl + '/users/' + this.userId, this.user, this.config)
       .then((res) => {
-        $log.debug('res in updateUser:', res);
         for (let i = 0; i < 7; i++) {
           let startArray = this.user.availability.start[i].split(':');
           let endArray = this.user.availability.end[i].split(':');
@@ -258,7 +264,14 @@ module.exports = function(app) {
           $timeout(() => {
             file.result = res.data;
           });
-          this.image = require('../../assets/' + res.data);
+          let binary = '';
+          let bytes = new Uint8Array(res.data.data.data);
+          for (let i = 0; i < bytes.byteLength; i++) {
+            binary += String.fromCharCode(bytes[i]);
+          }
+          let uploadedImageData = window.btoa(binary);
+          this.image = 'data:' + res.data.contentType + ';base64,' + uploadedImageData;
+
           this.editingImage = false;
         }, (res) => {
           if(res.status > 0) {

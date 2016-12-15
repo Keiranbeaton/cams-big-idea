@@ -4,21 +4,26 @@ module.exports = function(app) {
   app.controller('SearchController', ['$log', '$http', 'kbErrors', SearchController]);
 
   function SearchController($log, $http, errors) {
-    this.userUrl = this.baseUrl + '/users/';
     this.allJobseekers = [];
     this.legal = [];
     this.software = [];
     this.searchIndustry = 'none';
     this.getAllUsers = function() {
       $log.debug('SearchController.getAllUsers');
-      $http.get(this.userUrl + '/jobseekers', this.config)
+      $http.get(this.baseUrl + '/users/', this.config)
       .then((res) => {
         this.allJobseekers = res.data;
         this.allJobseekers.forEach((user) => {
           if(user.image) {
-            user.thumbnail = require('../../assets/' + user.image.imageUrl);
+            let binary = '';
+            let bytes = new Uint8Array(user.image.data.data);
+            for (let i = 0; i < bytes.byteLength; i++) {
+              binary += String.fromCharCode(bytes[i]);
+            }
+            let formattedImageData = window.btoa(binary);
+            user.thumbnail = 'data:' + user.image.contentType + ';base64,' + formattedImageData;
           } else {
-            user.thumbnail = require('../../assets/no-image.svg');
+            user.thumbnail = require('../../assets/no-img.png');
           }
           if(user.industry === 'Software') this.software.push(user);
           if(user.industry === 'Legal') this.legal.push(user);

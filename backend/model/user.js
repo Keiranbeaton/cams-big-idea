@@ -104,7 +104,7 @@ userSchema.methods.addSkill = function(data) {
 userSchema.methods.addImage = function(data) {
   let result;
   return new Promise((resolve, reject) => {
-    if(!data.userId || !data.imageUrl) return reject(createError(400, 'Image requires a url and a userId'));
+    if(!data.userId) return reject(createError(400, 'Image requires a url and a userId'));
     new Image(data).save()
       .then(image => {
         result = image;

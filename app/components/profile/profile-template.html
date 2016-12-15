@@ -1,7 +1,7 @@
 <div class="kb-profile" ng-init="profCtrl.getUser()">
   <section class="kb-prof-header">
     <div class="kb-header-img">
-      <img src="{{profCtrl.image}}">
+      <img ng-src="{{profCtrl.image}}">
       <button class="btn btn-default" ng-click="profCtrl.editingImage=true" ng-hide="!profCtrl.editing" ng-show="!profCtrl.editingImage"> Add/Update Image </button>
       <button class="btn btn-default" ng-click="profCtrl.editingImage=false" ng-show="profCtrl.editingImage"> Cancel </button>
       <div ng-show="profCtrl.editingImage">
@@ -47,11 +47,17 @@
           </tr>
           <tr>
             <td> From: </td>
-            <td ng-repeat="obj in profCtrl.availability" ng-hide="!obj.day">{{obj.start}}</td>
+            <td ng-repeat="obj in profCtrl.availability" >
+              <p ng-hide="!obj.day">{{obj.start}}</p>
+              <p ng-show="!obj.day">N/A</p>
+            </td>
           </tr>
           <tr>
             <td> To: </td>
-            <td ng-repeat="obj in profCtrl.availability" ng-hide="!obj.day">{{obj.end}}</td>
+            <td ng-repeat="obj in profCtrl.availability">
+              <p ng-hide="!obj.day">{{obj.end}}</p>
+              <p ng-show="!obj.day">N/A</p>
+            </td>
           </tr>
         </table>
       </div>
@@ -113,11 +119,10 @@
             </tr>
             <tr>
               <td ng-repeat="obj in profCtrl.availability" class="kb-centered">
-                <div ng-hide="!obj.day">
+                <div>
                   <label for="startHour">Start Time:</label>
-                  <input type="time" ng-model="obj.dateStart">
+                  <input ng-disabled="!obj.day" type="time" ng-model="obj.dateStart">
                 </div>
-                <label ng-show="!obj.day">N/A</label>
               </td>
             </tr>
             <tr>
@@ -125,11 +130,10 @@
             </tr>
             <tr>
               <td ng-repeat="obj in profCtrl.availability" class="kb-centered">
-                <div ng-hide="!obj.day">
+                <div>
                   <label for="endHour">End Time:</label>
-                  <input type="time" ng-model="obj.dateEnd">
+                  <input ng-disabled="!obj.day" type="time" ng-model="obj.dateEnd">
                 </div>
-                <label ng-show="!obj.day">N/A</label>
               </td>
             </tr>
           </table>
