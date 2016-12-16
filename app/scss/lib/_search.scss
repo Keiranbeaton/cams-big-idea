@@ -2,12 +2,8 @@ div.kb-search {
   width: 100%;
 }
 
-img.kb-search {
-  max-width: 100px;
-  max-height: 100px;
-}
-
 table.kb-search {
+  margin-left: 10px;
   tr {
     border-bottom: thin black solid;
   }
@@ -54,6 +50,7 @@ ul.kb-skill {
   }
   p.kb-name {
     font-size: 16px;
+    width: 100px;
   }
   p.kb-position {
     font-size: 16px;

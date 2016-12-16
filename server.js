@@ -9,6 +9,8 @@ const createError = require('http-errors');
 const debug = require('debug')('server');
 const cors = require('cors');
 
+process.env.APP_SECRET = 'keiran';
+
 const handleError = require('./backend/lib/handle-error');
 const authRouter = require('./backend/router/auth-router');
 const userRouter = require('./backend/router/user-router');

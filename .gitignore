@@ -3,7 +3,7 @@
 db
 build
 node_modules
-app/assets
+
 
 ### Windows ###
 # Windows image file caches

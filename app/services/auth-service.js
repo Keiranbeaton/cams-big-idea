@@ -33,7 +33,6 @@ module.exports = function(app) {
         this.currentUser.userId = false;
         this.currentUser.username = false;
         this.token = '';
-        $location.path('/home');
       }
     };
   }]);

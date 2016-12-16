@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('AuthController', ['$http', '$location', '$window', '$log', 'auth', function($http, $location, $window, $log, auth) {
+  app.controller('AuthController', ['$http', '$location', '$window', '$log', '$rootScope', 'auth', function($http, $location, $window, $log, $rootScope, auth) {
     this.wrongPassword = false;
     this.currentUser = {userId: false, username: false};
 
@@ -12,6 +12,7 @@ module.exports = function(app) {
         .then((res) => {
           auth.setToken(res.data);
           this.currentUser = auth.currentUser;
+          $rootScope.$broadcast('loggedIn');
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signup: ', err);
@@ -36,6 +37,7 @@ module.exports = function(app) {
         .then((res) => {
           auth.setToken(res.data);
           this.currentUser = auth.currentUser;
+          $rootScope.$broadcast('loggedIn');
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signin: ' + err);
@@ -46,6 +48,8 @@ module.exports = function(app) {
     this.signout = function() {
       auth.logOut();
       this.currentUser = auth.currentUser;
+      $rootScope.$broadcast('loggedOut');
+      $location.path('/home');
     };
 
     this.checkUser = function() {
@@ -62,8 +66,6 @@ module.exports = function(app) {
       }
     };
 
-
     this.getUser = auth.getUser.bind(auth);
-    this.signout = auth.logOut.bind(auth);
   }]);
 };
