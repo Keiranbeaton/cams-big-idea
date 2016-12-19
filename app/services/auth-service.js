@@ -3,7 +3,7 @@
 module.exports = function(app) {
   app.factory('auth', ['$window', 'jwtHelper', '$location', function($window, jwt, $location) {
     return {
-      currentUser: {},
+      currentUser: {userId: false, username: false},
       getToken: function(options) {
         options = options || {};
         if(this.token) return this.token;

@@ -6,30 +6,6 @@
     <link rel="stylesheet" href="bundle.css">
     <script src="bundle.js"></script>
   </head>
-  <body>
-    <header>
-      <nav class="navbar navbar-default" ng-controller="NavController">
-        <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#/home">Cam's Big Idea</a>
-          </div>
-          <ul class="nav nav-pills navbar-right kb-link-container">
-            <li class="kb-link"><a href="#/home"> Home </a></li>
-            <li class="kb-link"><a href="#/signin"> Log in/Log Out </a></li>
-            <li class="kb-link"><a href="#/search"> Find A Professional </a></li>
-            <li class="kb-link" ng-show="NavController.userId"><a href="#/profile/{{NavController.userId}}"> My Profile </a></li>
-            <li class="kb-link" ng-hide="NavController.userId"><a href="#/signup/user"> Sign Up </a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <main ng-view></main>
-    <footer>
-      <nav class="navbar navbar-default">
-        <div class="container">
-          <p class="pull-left"> &copy; 2016 Keiran Beaton</p>
-        </div>
-      </nav>
-    </footer>
+  <body ng-view>
   </body>
 </html>

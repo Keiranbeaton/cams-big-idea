@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = (app) => {
+  require('./header')(app);
   require('./signin')(app);
   require('./signup-user')(app);
   require('./signout')(app);

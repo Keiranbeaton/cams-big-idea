@@ -1,0 +1,16 @@
+<header>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#/home">Cam's Big Idea</a>
+      </div>
+      <ul class="nav nav-pills navbar-right kb-link-container">
+        <li class="kb-link"><a href="#/home"> Home </a></li>
+        <li class="kb-link"><a href="#/signin"> Log in/Log Out </a></li>
+        <li class="kb-link"><a href="#/search"> Find A Professional </a></li>
+        <li class="kb-link" ng-show="navCtrl.userId"><a ng-href="#/profile/{{navCtrl.userId}}"> My Profile </a></li>
+        <li class="kb-link" ng-hide="navCtrl.userId"><a href="#/signup/user"> Sign Up </a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
