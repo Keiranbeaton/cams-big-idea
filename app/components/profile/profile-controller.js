@@ -43,8 +43,8 @@ module.exports = function(app) {
           }
           let formattedImageData = window.btoa(binary);
           this.image = 'data:' + this.user.image.contentType + ';base64,' + formattedImageData;
+          this.user.image = this.user.image._id;
         }
-        this.user.image = this.user.image._id;
         this.startHours = this.user.availability.start.map((date) => {
           let startArray = date.split(':');
           let hour = parseInt(startArray[0]);
