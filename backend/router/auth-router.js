@@ -22,6 +22,7 @@ authRouter.post('/signup', jsonParser, (req, res, next) => {
   newUser.basic.email = req.body.email;
   newUser.role = req.body.role;
   newUser.industry = req.body.industry;
+  newUser.availability = {day:[false, false, false, false, false, false, false], start: ['09:00', '09:00', '09:00', '09:00', '09:00', '09:00', '09:00'], end:['17:00', '17:00', '17:00', '17:00', '17:00', '17:00', '17:00']};
   newUser.generateHash(req.body.password)
     .then((tokenData) => {
       newUser.save().then((userReturn) => {

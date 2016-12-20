@@ -28,9 +28,9 @@ let userSchema = mongoose.Schema({
   companyName: String,
   memberSince: String,
   availability: {
-    day: {type: Array, default: [false, false, false, false, false, false, false]},
-    start: {type: Array, default: ['09:00', '09:00', '09:00', '09:00', '09:00', '09:00', '09:00']},
-    end: {type: Array, default: ['17:00', '17:00', '17:00', '17:00', '17:00', '17:00', '17:00']}
+    day: [Boolean],
+    start: [String],
+    end: [String]
   },
   industry: String
 });
