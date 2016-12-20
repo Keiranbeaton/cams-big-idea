@@ -3,8 +3,7 @@
 module.exports = function(app) {
   app.controller('AuthController', ['$http', '$location', '$window', '$log', '$rootScope', 'auth', function($http, $location, $window, $log, $rootScope, auth) {
     this.wrongPassword = false;
-    this.currentUser = {userId: false, username: false};
-
+    this.currentUser = {};
     this.signupUser = function(user) {
       $log.log('AuthController.signupUser');
       user.role = 'jobseeker';
@@ -48,20 +47,19 @@ module.exports = function(app) {
     this.signout = function() {
       auth.logOut();
       this.currentUser = auth.currentUser;
-      $rootScope.$broadcast('loggedOut');
       $location.path('/home');
     };
 
     this.checkUser = function() {
       let user = this.getUser();
-      if (user.username !== false) {
+      if (user.username !== false && user.username !== undefined) {
         $location.path('/signout');
       }
     };
 
     this.checkNoUser = function() {
       let user = this.getUser();
-      if (user.username === false) {
+      if (user.username === false || user.username === undefined) {
         $location.path('/signin');
       }
     };

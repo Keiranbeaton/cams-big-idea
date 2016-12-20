@@ -5,7 +5,7 @@ module.exports = (app) => {
     return {
       controller: 'NavController',
       controllerAs: 'navCtrl',
-      template: require('./header-template.html'),
+      template: require('./nav-template.html'),
       bindToController: true,
     };
   });

@@ -3,7 +3,7 @@
 module.exports = function(app) {
   app.factory('auth', ['$window', 'jwtHelper', '$location', function($window, jwt, $location) {
     return {
-      currentUser: {userId: false, username: false},
+      currentUser: {},
       getToken: function(options) {
         options = options || {};
         if(this.token) return this.token;
@@ -11,8 +11,8 @@ module.exports = function(app) {
       },
       setToken: function(tokenData) {
         $window.localStorage.token = tokenData.token;
+        $window.localStorage.userId = tokenData.userId;
         this.token = tokenData.token;
-        this.userId = tokenData.userId;
         this.currentUser.userId = tokenData.userId;
         this.getUser();
         return tokenData.token;
@@ -20,16 +20,25 @@ module.exports = function(app) {
       getUser: function() {
         let token = this.getToken();
         if (!token) {
-          this.currentUser.username = false;
-          this.currentUser.userId = false;
           return this.currentUser;
         }
         let decoded = jwt.decodeToken(token);
         this.currentUser.username = decoded.idd;
+        $window.localStorage.username = decoded.idd;
         return this.currentUser;
+      },
+      refreshUser: function() {
+        if(this.currentUser.username === undefined) {
+          this.currentUser.username = $window.localStorage.username;
+        }
+        if(this.currentUser.userId === undefined) {
+          this.currentUser.userId = $window.localStorage.userId;
+        }
       },
       logOut: function() {
         $window.localStorage.token = '';
+        $window.localStorage.userId = false;
+        $window.localStorage.username = false;
         this.currentUser.userId = false;
         this.currentUser.username = false;
         this.token = '';

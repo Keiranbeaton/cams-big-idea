@@ -1,6 +1,6 @@
 'use strict';
 
 module.exports = (app) => {
-  require('./header-controller')(app);
-  require('./header-directive')(app);
-}
+  require('./nav-controller')(app);
+  require('./nav-directive')(app);
+};
