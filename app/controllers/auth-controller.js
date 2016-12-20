@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('AuthController', ['$http', '$location', '$window', '$log', '$rootScope', 'auth', function($http, $location, $window, $log, $rootScope, auth) {
+  app.controller('AuthController', ['$http', '$location', '$window', '$log', 'auth', function($http, $location, $window, $log, auth) {
     this.wrongPassword = false;
     this.currentUser = {};
     this.signupUser = function(user) {
@@ -11,7 +11,6 @@ module.exports = function(app) {
         .then((res) => {
           auth.setToken(res.data);
           this.currentUser = auth.currentUser;
-          $rootScope.$broadcast('loggedIn');
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signup: ', err);
@@ -36,7 +35,6 @@ module.exports = function(app) {
         .then((res) => {
           auth.setToken(res.data);
           this.currentUser = auth.currentUser;
-          $rootScope.$broadcast('loggedIn');
           $location.path('/profile/' + auth.currentUser.userId);
         }, (err) => {
           $log.error('error in AuthController.signin: ' + err);
