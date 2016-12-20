@@ -100,7 +100,7 @@ module.exports = function(app) {
     this.updateUser = function() {
       $log.debug('ProfileController.updateUser');
       $log.log('this.user.availability:', this.user.availability);
-      $log.log('this.availability:', this.availalability);
+      $log.log('this.availability:', this.availability);
       for (let i = 0; i < 7; i++) {
         this.user.availability.day[i] = this.availability[i].day;
         if (this.availability[i].day === false) {
