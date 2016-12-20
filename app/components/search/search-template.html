@@ -15,24 +15,28 @@
         <th> Skills/Area of Expertise </th>
       </tr>
       <tr ng-if="searchCtrl.searchIndustry==='Legal'" ng-repeat="user in searchCtrl.legal">
-        <td><p class="kb-name"> {{user.firstName}} {{user.lastName}} </p></td>
-        <td><p class="kb-position"> {{user.position}} </p></td>
-        <td><p class="kb-location"> {{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}}</p></td>
-        <td>
-          <ul class="kb-skill">
-            <li ng-repeat="skill in user.skills"> {{skill.content}} </li>
-          </ul>
-        </td>
+        <a ng-href="#/profile/{{user._id}}">
+          <td><p class="kb-name"> {{user.firstName}} {{user.lastName}} </p></td>
+          <td><p class="kb-position"> {{user.position}} </p></td>
+          <td><p class="kb-location"> {{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}}</p></td>
+          <td>
+            <ul class="kb-skill">
+              <li ng-repeat="skill in user.skills"> {{skill.content}} </li>
+            </ul>
+          </td>
+        </a>
       </tr>
       <tr ng-if="searchCtrl.searchIndustry==='Software'" ng-repeat="user in searchCtrl.software">
-        <td><p class="kb-name"> {{user.firstName}} {{user.lastName}} </p></td>
-        <td><p class="kb-position"> {{user.position}} </p></td>
-        <td><p class="kb-location"> {{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}}</p></td>
-        <td>
-          <ul class="kb-skill">
-            <li ng-repeat="skill in user.skills"> {{skill.content}} </li>
-          </ul>
-        </td>
+        <a ng-href="#/profile/{{user._id}}">
+          <td><p class="kb-name"> {{user.firstName}} {{user.lastName}} </p></td>
+          <td><p class="kb-position"> {{user.position}} </p></td>
+          <td><p class="kb-location"> {{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}}</p></td>
+          <td>
+            <ul class="kb-skill">
+              <li ng-repeat="skill in user.skills"> {{skill.content}} </li>
+            </ul>
+          </td>
+        </a>
       </tr>
     </table>
   </div>
