@@ -26,41 +26,47 @@
     <button class="btn btn-default" type="button" ng-if="profCtrl.ownProfile" ng-show="profCtrl.editing" ng-click="profCtrl.deleteUser(profCtrl.user)"> Delete User </button>
     <div class="kb-header-avail" ng-show="!profCtrl.editing">
       <h4>Availability</h4>
-      <div style="overflow-x:auto;">
-        <table>
-          <tr>
-            <th> Day: </th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-            <th>Sun</th>
-          </tr>
-          <tr>
-            <td>  </td>
-            <td ng-repeat="obj in profCtrl.availability">
+      <ul class="kb-avail">
+        <li class="kb-row">
+          <ul>
+            <li> Day: </li>
+            <li> Mon </li>
+            <li> Tue </li>
+            <li> Wed </li>
+            <li> Thu </li>
+            <li> Fri </li>
+            <li> Sat </li>
+            <li> Sun </li>
+          </ul>
+        </li>
+        <li class="kb-row">
+          <ul>
+            <li></li>
+            <li ng-repeat="obj in profCtrl.availability">
               <i class="fa fa-check" aria-hidden="true" ng-show="obj.day"></i>
               <i class="fa fa-times" aria-hidden="true" ng-show="!obj.day"></i>
-            </td>
-          </tr>
-          <tr>
-            <td> From: </td>
-            <td ng-repeat="obj in profCtrl.availability" >
+            </li>
+          </ul>
+        </li>
+        <li class="kb-row">
+          <ul>
+            <li> From: </li>
+            <li ng-repeat="obj in profCtrl.availability" >
               <p ng-hide="!obj.day">{{obj.start}}</p>
               <p ng-show="!obj.day">N/A</p>
-            </td>
-          </tr>
-          <tr>
-            <td> To: </td>
-            <td ng-repeat="obj in profCtrl.availability">
+            </li>
+          </ul>
+        </li>
+        <li class="kb-row">
+          <ul>
+            <li> To: </li>
+            <li ng-repeat="obj in profCtrl.availability" >
               <p ng-hide="!obj.day">{{obj.end}}</p>
               <p ng-show="!obj.day">N/A</p>
-            </td>
-          </tr>
-        </table>
-      </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
     <form ng-submit="profCtrl.updateUser()" ng-hide="!profCtrl.editing" class="kb-update-form">
       <div class="kb-update-group">
@@ -92,52 +98,46 @@
         <input type="text" name="Country" ng-model="profCtrl.user.locationCountry">
       </div>
         <h4>Availability</h4>
-        <div style="overflow-x:auto;">
-          <table class="kb-form-table">
-            <tr>
-              <th class="kb-label" colspan="7">Day of the Week</th>
-            </tr>
-            <tr>
-              <th>Mon</th>
-              <th>Tue</th>
-              <th>Wed</th>
-              <th>Thu</th>
-              <th>Fri</th>
-              <th>Sat</th>
-              <th>Sun</th>
-            </tr>
-            <tr>
-              <th class="kb-label" colspan="7">Are you available to work this day?</th>
-            </tr>
-            <tr>
-              <td ng-repeat="obj in profCtrl.availability" class="kb-centered">
+        <ul>
+          <li> Day of the Week</li>
+          <li>
+            <ul>
+              <li> Mon </li>
+              <li> Tue </li>
+              <li> Wed </li>
+              <li> Thu </li>
+              <li> Fri </li>
+              <li> Sat </li>
+              <li> Sun </li>
+            </ul>
+          </li>
+          <li> Are you Available to work this day? </li>
+          <li>
+            <ul>
+              <li ng-repeat="obj in profCtrl.availability">
                 <select ng-model="obj.day" ng-options="opt.value as opt.label for opt in profCtrl.options"></select>
-              </td>
-            </tr>
-            <tr>
-              <th class="kb-label" colspan="7">What time would you like to start?</th>
-            </tr>
-            <tr>
-              <td ng-repeat="obj in profCtrl.availability" class="kb-centered">
-                <div>
-                  <label for="startHour">Start Time:</label>
-                  <input ng-disabled="!obj.day" type="time" ng-model="obj.dateStart">
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th class="kb-label" colspan="7">What time would you like to finish?</th>
-            </tr>
-            <tr>
-              <td ng-repeat="obj in profCtrl.availability" class="kb-centered">
-                <div>
-                  <label for="endHour">End Time:</label>
-                  <input ng-disabled="!obj.day" type="time" ng-model="obj.dateEnd">
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
+              </li>
+            </ul>
+          </li>
+          <li> What time would you like to start? </li>
+          <li>
+            <ul>
+              <li ng-repeat="obj in profCtrl.availability">
+                <label for="startHour"> Start time: </label>
+                <input type="time" ng-model="obj.dateStart" ng-disabled="!obj.day">
+              </li>
+            </ul>
+          </li>
+          <li> What time would you like to finish? </li>
+          <li>
+            <ul>
+              <li ng-repeat="obj in profCtrl.availability">
+                <label for="endHour"> End Time: </label>
+                <input type="time" ng-model="obj.dateEnd" ng-disabled="!obj.day">
+              </li>
+            </ul>
+          </li>
+        </ul>
         <button class="btn btn-default" type="submit" ng-hide="!profCtrl.editing">Save Profile</button>
       </form>
   </section>
