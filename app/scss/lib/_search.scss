@@ -1,69 +1,68 @@
 div.kb-search {
   width: 100%;
-}
-
-section.kb-search {
-  margin-top: 20%;
-  margin-left: 10%;
-  margin-right: 10%;
-  width: 80%;
-  border: thin black solid;
-  text-align: center;
-  > form {
+  section {
+    margin-top: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    border: thin black solid;
+    border-radius: 5px;
+    text-align: center;
+  }
+  form {
     display: inline-block;
     margin-left: 4%;
   }
-  > h5 {
+  h5 {
     display: inline-block;
     font-size: 10px;
   }
-}
-
-button.kb-search-button {
-
-}
-
-ul.kb-search-result {
-  width: 100%;
-  padding: 0;
-}
-
-ul.kb-search-group {
-  width: 100%;
-  padding: 0;
-  >li {
-    display: inline-block;
-    vertical-align: top;
+  button{
+    margin-left: 5%;
+    margin-bottom: 5%;
   }
-}
+  ul.kb-search-result {
+    width: 100%;
+    padding: 0;
+  }
 
-li.kb-search-row {
-  list-style-type: none;
-  padding-left: 5px;
-  border-bottom: solid thin black;
-  margin-bottom: 5px;
-}
+  ul.kb-search-group {
+    width: 100%;
+    padding: 0;
+    >li {
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
 
-li.kb-search-name {
-  width: 20%;
-}
+  li.kb-search-row {
+    list-style-type: none;
+    padding-left: 5px;
+    border-bottom: solid thin black;
+    margin-bottom: 5px;
+  }
 
-li.kb-search-position {
-  width: 25%;
-}
+  li.kb-search-name {
+    width: 20%;
+  }
 
-li.kb-search-location {
-  width: 25%;
-}
+  li.kb-search-position {
+    width: 25%;
+  }
 
-li.kb-search-skills {
-  width: 25%;
-  > p {
-    display: inline-block;
-    border: solid thin black;
-    border-radius: 5px;
-    padding: 1px;
-    margin: 2px;
+  li.kb-search-location {
+    width: 25%;
+  }
+
+  li.kb-search-skills {
+    width: 25%;
+    > p {
+      display: inline-block;
+      border: solid thin black;
+      border-radius: 5px;
+      padding: 1px;
+      margin: 2px;
+    }
   }
 }
 
@@ -73,13 +72,25 @@ li.kb-search-skills {
       font-size: 24px;
     }
     form {
-
+      height: 26px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    button {
+      margin-top:5%;
     }
   }
 }
 
 @media (min-width:1200px) {
-  ul.kb-skill {
-    width: 300px;
+
+  div.kb-search {
+    h5, form {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      ul.kb-skill {
+        width: 300px;
+      }
+    }
   }
 }

@@ -16,11 +16,6 @@ module.exports = function(app) {
     this.skills = [];
     this.education = [];
     this.experience = [];
-    this.availability = [];
-    this.editingStart = [new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date()];
-    this.editingEnd = [new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date()];
-    this.startHours = [];
-    this.endHours = [];
 
     this.getUser = function() {
       $log.debug('ProfileController.getUser');
@@ -45,52 +40,7 @@ module.exports = function(app) {
           this.image = 'data:' + this.user.image.contentType + ';base64,' + formattedImageData;
           this.user.image = this.user.image._id;
         }
-        this.startHours = this.user.availability.start.map((date) => {
-          let startArray = date.split(':');
-          let hour = parseInt(startArray[0]);
-          let minutes = parseInt(startArray[1]);
-          if (minutes === 0) {
-            if (hour === 25) return 'N/A';
-            if (hour === 0) return '12:00 am';
-            if (hour > 0 && hour < 12) return hour + ':00 am';
-            if (hour === 12) return hour + ':00 pm';
-            if (hour > 12) return (hour-12) + ':00 pm';
-          }
-          if (minutes !== 0) {
-            if (hour === 25) return 'N/A';
-            if (hour === 0) return '12:' + minutes + ' am';
-            if (hour > 0 && hour < 12) return hour + ':' + minutes + ' am';
-            if (hour === 12) return hour + ':' + minutes + ' pm';
-            if (hour > 12) return (hour-12) + ':' + minutes + ' pm';
-          }
-        });
-        this.endHours = this.user.availability.end.map((date) => {
-          let endArray = date.split(':');
-          let hour = parseInt(endArray[0]);
-          let minutes = parseInt(endArray[1]);
-          if (minutes === 0) {
-            if (hour === 25) return 'N/A';
-            if (hour === 0) return '12:00 am';
-            if (hour > 0 && hour < 12) return hour + ':00 am';
-            if (hour === 12) return hour + ':00 pm';
-            if (hour > 12) return (hour-12) + ':00 pm';
-          }
-          if (minutes !== 0) {
-            if (hour === 25) return 'N/A';
-            if (hour === 0) return '12:' + minutes + ' am';
-            if (hour > 0 && hour < 12) return hour + ':' + minutes + ' am';
-            if (hour === 12) return hour + ':' + minutes + ' pm';
-            if (hour > 12) return (hour-12) + ':' + minutes + ' pm';
-          }
-        });
-
-        for (let i = 0; i < 7; i++) {
-          let startArray = this.user.availability.start[i].split(':');
-          let endArray = this.user.availability.end[i].split(':');
-          this.editingStart[i].setHours(startArray[0], startArray[1], 0, 0);
-          this.editingEnd[i].setHours(endArray[0], endArray[1], 0, 0);
-          this.availability[i] = {day: this.user.availability.day[i], start: this.startHours[i], end: this.endHours[i], dateStart: this.editingStart[i], dateEnd: this.editingEnd[i]};
-        }
+        this.availability = this.user.availability;
       }, (err) => {
         errors.add(new Error('Network Communication failure in request for User'));
         $log.error('error in ProfileController.getUser:', err);
@@ -99,57 +49,8 @@ module.exports = function(app) {
 
     this.updateUser = function() {
       $log.debug('ProfileController.updateUser');
-      $log.log('this.user.availability:', this.user.availability);
-      $log.log('this.availability:', this.availability);
-      for (let i = 0; i < 7; i++) {
-        this.user.availability.day[i] = this.availability[i].day;
-        if (this.availability[i].day === false) {
-          this.user.availability.start[i] = '09:00';
-          this.user.availability.end[i] = '17:00';
-        } else {
-          this.user.availability.start[i] = this.availability[i].dateStart.getHours() + ':' + this.availability[i].dateStart.getMinutes();
-          this.user.availability.end[i] = this.availability[i].dateEnd.getHours() + ':' + this.availability[i].dateEnd.getMinutes();
-        }
-      }
       $http.put(this.baseUrl + '/users/' + this.userId, this.user, this.config)
       .then((res) => {
-        for (let i = 0; i < 7; i++) {
-          let startArray = this.user.availability.start[i].split(':');
-          let endArray = this.user.availability.end[i].split(':');
-          let startHour = parseInt(startArray[0]);
-          let startMinutes = parseInt(startArray[1]);
-          let endHour = parseInt(endArray[0]);
-          let endMinutes = parseInt(endArray[1]);
-          if (startMinutes === 0) {
-            if (startHour === 25) this.availability[i].start = 'N/A';
-            if (startHour === 0) this.availability[i].start = '12:00 am';
-            if (startHour > 0 && startHour < 12) this.availability[i].start = startHour + ':00 am';
-            if (startHour === 12) this.availability[i].start = startHour + ':00 pm';
-            if (startHour > 12) this.availability[i].start = (startHour-12) + ':00 pm';
-          }
-          if (startMinutes !== 0) {
-            if (startHour === 25) this.availability[i].start = 'N/A';
-            if (startHour === 0) this.availability[i].start = '12:' + startMinutes + ' am';
-            if (startHour > 0 && startHour < 12) this.availability[i].start = startHour + ':' + startMinutes + ' am';
-            if (startHour === 12) this.availability[i].start = startHour + ':' + startMinutes + ' pm';
-            if (startHour > 12) this.availability[i].start = (startHour-12) + ':' + startMinutes + ' pm';
-          }
-          if (endMinutes === 0) {
-            if (endHour === 25) this.availability[i].end = 'N/A';
-            if (endHour === 0) this.availability[i].end = '12:00 am';
-            if (endHour > 0 && endHour < 12) this.availability[i].end = endHour + ':00 am';
-            if (endHour === 12) this.availability[i].end = endHour + ':00 pm';
-            if (endHour > 12) this.availability[i].end = (endHour-12) + ':00 pm';
-          }
-          if (endMinutes !== 0) {
-            if (endHour === 25) this.availability[i].end = 'N/A';
-            if (endHour === 0) this.availability[i].end = '12:' + endMinutes + ' am';
-            if (endHour > 0 && endHour < 12) this.availability[i].end = endHour + ':' + endMinutes + ' am';
-            if (endHour === 12) this.availability[i].end = endHour + ':' + endMinutes + ' pm';
-            if (endHour > 12) this.availability[i].end = (endHour-12) + ':' + endMinutes + ' pm';
-          }
-
-        }
         this.editing = false;
       });
     }, (err) => {
