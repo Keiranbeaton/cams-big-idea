@@ -64,7 +64,7 @@ module.exports = function(app) {
       .then((res) => {
         $log.debug('User' + user.firstName + ' ' + user.lastName + ' deleted');
         $log.debug('Res in delete User:', res);
-        auth.currentUser = {username: false, userId: false};
+        auth.logOut();
         $location.path('/home');
       }, (err) => {
         errors.add(new Error('Network Communication failure in request to delete User profile'));

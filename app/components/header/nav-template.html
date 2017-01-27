@@ -8,8 +8,8 @@
         <li class="kb-link"><a href="#/home"> Home </a></li>
         <li class="kb-link"><a href="#/signin"> Log in/Log Out </a></li>
         <li class="kb-link"><a href="#/search"> Find A Professional </a></li>
-        <li class="kb-link" ng-show="navCtrl.userId"><a ng-href="#/profile/{{navCtrl.userId}}"> My Profile </a></li>
-        <li class="kb-link" ng-hide="navCtrl.userId"><a href="#/signup/user"> Sign Up </a></li>
+        <li class="kb-link" ng-show="navCtrl.userId!=='none'"><a ng-href="#/profile/{{navCtrl.userId}}"> My Profile </a></li>
+        <li class="kb-link" ng-hide="navCtrl.userId!=='none'"><a href="#/signup/user"> Sign Up </a></li>
       </ul>
     </div>
   </nav>
