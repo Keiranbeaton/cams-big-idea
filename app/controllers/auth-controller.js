@@ -50,14 +50,15 @@ module.exports = function(app) {
 
     this.checkUser = function() {
       let user = this.getUser();
-      if (user.username !== false && user.username !== undefined) {
+      $log.log('Current User:', user);
+      if ( user.username !== 'none') {
         $location.path('/signout');
       }
     };
 
     this.checkNoUser = function() {
       let user = this.getUser();
-      if (user.username === false || user.username === undefined) {
+      if (user.username === 'none') {
         $location.path('/signin');
       }
     };

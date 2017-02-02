@@ -1,39 +1,51 @@
 <div class="kb-search" ng-init="searchCtrl.getAllUsers()">
-  <h4>Select Industry to Find a Professional</h4>
-  <form ng-if="searchCtrl.searchIndustry==='none'">
-    <select ng-model="searchCtrl.searchIndustry">
-      <option ng-repeat="item in searchCtrl.industryList" value={{item}}>{{item}}</option>
-    </select>
-  </form>
-  <button class="btn btn-default" ng-if="searchCtrl.searchIndustry !== 'none'" ng-click="searchCtrl.searchIndustry='none'">Search Different Industry</button>
-  <div style="overflow-x:auto;">
-    <table class="kb-search" ng-if="searchCtrl.searchIndustry !== 'none'">
-      <tr>
-        <th> Name </th>
-        <th> Position </th>
-        <th> Location </th>
-        <th> Skills/Area of Expertise </th>
-      </tr>
-      <tr ng-if="searchCtrl.searchIndustry==='Legal'" ng-repeat="user in searchCtrl.legal">
-          <td><p class="kb-name"><a ng-href="#/profile/{{user._id}}"> {{user.firstName}} {{user.lastName}}</a></p></td>
-          <td><p class="kb-position"> {{user.position}} </p></td>
-          <td><p class="kb-location"> {{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}}</p></td>
-          <td>
-            <ul class="kb-skill">
-              <li ng-repeat="skill in user.skills"> {{skill.content}} </li>
-            </ul>
-          </td>
-      </tr>
-      <tr ng-if="searchCtrl.searchIndustry==='Software'" ng-repeat="user in searchCtrl.software">
-          <td><p class="kb-name"><a ng-href="#/profile/{{user._id}}">{{user.firstName}} {{user.lastName}}</a></p></td>
-          <td><p class="kb-position"> {{user.position}} </p></td>
-          <td><p class="kb-location"> {{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}}</p></td>
-          <td>
-            <ul class="kb-skill">
-              <li ng-repeat="skill in user.skills"> {{skill.content}} </li>
-            </ul>
-          </td>
-      </tr>
-    </table>
-  </div>
+  <section ng-if="searchCtrl.searchIndustry==='none'" class="kb-search">
+    <h5>Select Industry to Find a Professional</h5>
+    <form class="kb-search">
+      <select ng-model="searchCtrl.searchIndustry">
+        <option ng-repeat="item in searchCtrl.industryList" value={{item}}>{{item}}</option>
+      </select>
+    </form>
+  </section>
+  <button class="btn btn-default kb-search-button" ng-if="searchCtrl.searchIndustry !== 'none'" ng-click="searchCtrl.searchIndustry='none'">Search Different Industry</button>
+  <ul ng-if="searchCtrl.searchIndustry=='Legal'" class="kb-search-result">
+    <li class="kb-search-row">
+      <ul class="kb-search-group">
+        <li class="kb-search-name"> Name </li>
+        <li class="kb-search-position"> Position </li>
+        <li class="kb-search-location"> Location </li>
+        <li class="kb-search-skills"> Skills </li>
+      </ul>
+    </li>
+    <li ng-repeat="user in searchCtrl.legal" class="kb-search-row">
+      <ul class="kb-search-group">
+        <li class="kb-search-name"><a ng-href="#/profile/{{user._id}}"> {{user.firstName}} {{user.lastName}} </a></li>
+        <li class="kb-search-position"> {{user.position}} </li>
+        <li class="kb-search-location"> {{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}} </li>
+        <li class="kb-search-skills">
+          <p ng-repeat="skill in user.skills" class="kb-search-single-skill"> {{skill.content}} </p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <ul ng-if="searchCtrl.searchIndustry=='Software'" class="kb-search-result">
+    <li class="kb-search-row">
+      <ul class="kb-search-group">
+        <li class="kb-search-name"> Name </li>
+        <li class="kb-search-position"> Position </li>
+        <li class="kb-search-location"> Location </li>
+        <li class="kb-search-skills"> Skills </li>
+      </ul>
+    </li>
+    <li ng-repeat="user in searchCtrl.software" class="kb-search-row">
+      <ul class="kb-search-group">
+        <li class="kb-search-name"><a ng-href="#/profile/{{user._id}}"> {{user.firstName}} {{user.lastName}} </a></li>
+        <li class="kb-search-position"> {{user.position}} </li>
+        <li class="kb-search-location"> {{user.locationCity}}, {{user.locationState}}, {{user.locationCountry}} </li>
+        <li class="kb-search-skills">
+          <p ng-repeat="skill in user.skills" class="kb-search-single-skill"> {{skill.content}} </p>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </div>

@@ -37,10 +37,10 @@ module.exports = function(app) {
       },
       logOut: function() {
         $window.localStorage.token = '';
-        $window.localStorage.userId = false;
-        $window.localStorage.username = false;
-        this.currentUser.userId = false;
-        this.currentUser.username = false;
+        $window.localStorage.userId = 'none';
+        $window.localStorage.username = 'none';
+        this.currentUser.userId = 'none';
+        this.currentUser.username = 'none';
         this.token = '';
       }
     };
