@@ -6,17 +6,17 @@ form.kb-signup {
 }
 
 form.kb-login {
-  div, button {
-    margin-left: $kb-mobile-gutter;
-  }
+  padding-left: $kb-mobile-gutter;
   p {
     color: $kb-error;
-    margin-left: $kb-mobile-gutter;
     margin-right: $kb-mobile-gutter;
   }
 }
 
 form.kb-logout {
+  p {
+    color: $kb-color4;
+  }
   text-align: center;
 }
 

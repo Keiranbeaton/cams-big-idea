@@ -16,7 +16,7 @@
       <h4>Looking to work {{profCtrl.availability}} hours per week</h4>
       <h4>Member Since {{profCtrl.user.memberSince}}</h4>
     </div>
-    <button class="btn btn-default kb-button" type="button" ng-if="profCtrl.ownProfile" ng-show="!profCtrl.editing" ng-click="profCtrl.editing=true"> Edit Profile </button>
+    <button class="btn kb-btn" type="button" ng-if="profCtrl.ownProfile" ng-show="!profCtrl.editing" ng-click="profCtrl.editing=true"> Edit Profile </button>
     <form ng-submit="profCtrl.updateUser()" ng-hide="!profCtrl.editing" class="kb-update-form">
       <div class="kb-update-group">
         <label for="firstName"> First name: </label>
@@ -72,7 +72,7 @@
   <section class="kb-prof-skill kb-prof-list">
     <h4>Skills/Areas of Expertise</h4>
     <ul>
-      <li ng-repeat="skill in profCtrl.skills">
+      <li ng-repeat="skill in profCtrl.skills" class="kb-skill">
         <p> {{skill.content}} <button class="btn btn-default -kb-skill-button" ng-click="profCtrl.removeSkill(skill)" ng-show="profCtrl.editing">X</button></p>
       </li>
     </ul>
