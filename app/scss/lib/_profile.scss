@@ -3,11 +3,12 @@ section.kb-prof-header {
   background-color: $kb-color1;
   margin: 5%;
   padding-top: $kb-mobile-gutter;
-  > button.kb-btn {
-    display: inline-block;
-    margin-left: $kb-mobile-gutter;
-    margin-bottom: $kb-mobile-gutter;
-  }
+}
+
+button.kb-prof-button {
+  display: inline-block;
+  margin-left: $kb-mobile-gutter;
+  margin-bottom: $kb-mobile-gutter;
 }
 
 div.kb-profile {
@@ -52,13 +53,6 @@ div.kb-update-group {
   margin-left: $kb-mobile-gutter;
 }
 
-
-button.kb-button {
-  display: inline-block;
-  margin-left: $kb-mobile-gutter;
-  margin-bottom: $kb-mobile-gutter;
-}
-
 section.kb-prof-list {
   @extend .kb-border;
   background-color: $kb-color1;
@@ -82,7 +76,7 @@ section.kb-prof-skill {
     button {
       font-size: 10px;
       padding-top: 2px;
-      padding-bottom: 0;
+      padding-bottom: 1px;
       padding-left: 6px;
       padding-right: 6px;
       margin-right: -5px;
