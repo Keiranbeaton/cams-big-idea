@@ -6,9 +6,6 @@ form.kb-auth-form {
   select {
     height: 20px;
   }
-  option {
-
-  }
 }
 
 form.kb-logout {
@@ -19,11 +16,14 @@ form.kb-logout {
 }
 
 @media (min-width: 768px) {
-  form.kb-signup {
+  form.kb-auth-form {
     font-size: 20px;
-  }
-  form.kb-login {
-    font-size: 20px;
+    input {
+      width: 40%;
+    }
+    select {
+      width: 20%;
+    }
   }
   form.kb-logout {
     margin-top: 15%;

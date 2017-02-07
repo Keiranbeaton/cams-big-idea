@@ -9,6 +9,7 @@ div.kb-search {
     text-align: center;
   }
   form {
+    vertical-align: top;
     display: inline-block;
     margin-left: 2%;
   }
@@ -81,13 +82,17 @@ div.kb-search {
       margin-top: 10px;
       margin-bottom: 10px;
     }
+    select {
+      height: 26px;
+      width: 100px;
+    }
     button {
-      margin-top:5%;
+      margin-top: 5%;
     }
   }
 }
 
-@media (min-width: 1150px) {
+@media (min-width: 1024px) {
   div.kb-search {
     > section {
       margin-top: 15%;
@@ -95,6 +100,9 @@ div.kb-search {
     h5, form {
       margin-top: 15px;
       margin-bottom: 15px;
+    }
+    select {
+      width: 150px;
     }
   }
 }
