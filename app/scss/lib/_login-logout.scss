@@ -1,31 +1,29 @@
-form.kb-signup {
+form.kb-auth-form {
   margin-left: $kb-mobile-gutter;
   p.kb-error {
     color: $kb-error;
   }
-}
-
-form.kb-login {
-  div, button {
-    margin-left: $kb-mobile-gutter;
-  }
-  p {
-    color: $kb-error;
-    margin-left: $kb-mobile-gutter;
-    margin-right: $kb-mobile-gutter;
+  select {
+    height: 20px;
   }
 }
 
 form.kb-logout {
+  p {
+    color: $kb-color4;
+  }
   text-align: center;
 }
 
 @media (min-width: 768px) {
-  form.kb-signup {
+  form.kb-auth-form {
     font-size: 20px;
-  }
-  form.kb-login {
-    font-size: 20px;
+    input {
+      width: 40%;
+    }
+    select {
+      width: 20%;
+    }
   }
   form.kb-logout {
     margin-top: 15%;

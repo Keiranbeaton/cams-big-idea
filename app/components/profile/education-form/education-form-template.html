@@ -1,28 +1,28 @@
-<form class="form-inline" ng-submit="eduCtrl.saveAndNull(eduCtrl.education)">
-  <div class="kb-update-group">
+<form class="form-inline kb-add-form" ng-submit="eduCtrl.saveAndNull(eduCtrl.education)">
+  <div class="kb-form-group">
     <label for="school">School:</label>
     <input type="text" name="school" ng-model="eduCtrl.education.school" required>
   </div>
-  <div class="kb-update-group">
+  <div class="kb-form-group">
     <label for="degree">Degree:</label>
     <input type="text" name="degree" ng-model="eduCtrl.education.degree">
   </div>
-  <div class="kb-update-group">
+  <div class="kb-form-group">
     <label for="major">Major:</label>
     <input type="text" name="major" ng-model="eduCtrl.education.major">
   </div>
-  <div class="kb-update-group">
+  <div class="kb-form-group">
     <label for="start">Start Year:</label>
     <input type="number" name="start" ng-model="eduCtrl.education.start">
   </div>
-  <div class="kb-update-group">
+  <div class="kb-form-group">
     <label for="finish">Finish Year:</label>
     <input type="number" name="finish" ng-model="eduCtrl.education.finish">
   </div>
-  <div class="kb-update-group">
+  <div class="kb-form-group">
     <label for="description">Description:</label>
-    <input type="text" name="description" ng-model="eduCtrl.education.description">
+    <textarea name="descriptionExp" maxlength="500" rows="10" columns="30" spellcheck="true"  ng-model="eduCtrl.education.description"></textarea>
   </div>
-  <button type="submit" class="btn btn-default kb-button">Add Education</button>
+  <button type="submit" class="btn kb-btn">Add Education</button>
   <ng-transclude></ng-transclude>
 </form>

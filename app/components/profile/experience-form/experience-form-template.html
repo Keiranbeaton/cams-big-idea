@@ -1,24 +1,24 @@
-<form class="form-inline" ng-submit="efCtrl.saveAndNull(efCtrl.experience)">
-  <div class="kb-update-group">
+<form class="form-inline kb-add-form" ng-submit="efCtrl.saveAndNull(efCtrl.experience)">
+  <div class="kb-form-group">
     <label for="title">Title:</label>
     <input type="text" name="title" ng-model="efCtrl.experience.title" required>
   </div>
-  <div class="kb-update-group">
+  <div class="kb-form-group">
     <label for="company">Company:</label>
     <input type="text" name="company" ng-model="efCtrl.experience.company" required>
   </div>
-  <div class="kb-update-group">
+  <div class="kb-form-group">
     <label for="start">Start Year:</label>
     <input type="number" name="start" ng-model="efCtrl.experience.start">
   </div>
-  <div class="kb-update-group">
+  <div class="kb-form-group">
     <label for="finish">Finish Year:</label>
     <input type="number" name="finish" ng-model="efCtrl.experience.finish">
   </div>
-  <div class="kb-update-group">
+  <div class="kb-form-group">
     <label for="descriptionExp">Description:</label>
-    <input type="text" name="descriptionExp" ng-model="efCtrl.experience.description">
+    <textarea name="descriptionExp" maxlength="500" rows="10" columns="30" spellcheck="true"  ng-model="efCtrl.experience.description"></textarea>
   </div>
-  <button type="submit" class="btn btn-default kb-button">Add Experience</button>
+  <button type="submit" class="btn kb-btn kb-prof-button">Add Experience</button>
   <ng-transclude></ng-transclude>
 </form>

@@ -1,28 +1,31 @@
 div.kb-search {
   width: 100%;
   section {
+    background-color: $kb-color1;
     margin-top: 20%;
     margin-left: 10%;
     margin-right: 10%;
     width: 80%;
-    border: thin black solid;
-    border-radius: 5px;
     text-align: center;
   }
   form {
+    vertical-align: top;
     display: inline-block;
-    margin-left: 4%;
+    margin-left: 2%;
   }
   h5 {
     display: inline-block;
     font-size: 10px;
   }
-  button{
+  button {
     margin-left: 5%;
     margin-bottom: 5%;
   }
   ul.kb-search-result {
-    width: 100%;
+    background-color: $kb-color1;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
     padding: 0;
   }
 
@@ -33,35 +36,38 @@ div.kb-search {
       display: inline-block;
       vertical-align: top;
     }
+    a:hover {
+      color: black;
+    }
+  }
+
+  ul.kb-search-header {
+    @extend .kb-search-group;
+    li {
+      text-align: center;
+    }
   }
 
   li.kb-search-row {
     list-style-type: none;
     padding-left: 5px;
-    border-bottom: solid thin black;
-    margin-bottom: 5px;
+    border-bottom: solid thin $kb-color4;
+    margin-top: 5px;
   }
 
   li.kb-search-name {
     width: 20%;
   }
 
-  li.kb-search-position {
+  li.kb-search-position, li.kb-search-location, li.kb-search-skills {
     width: 25%;
+    padding-left: 2px;
   }
 
-  li.kb-search-location {
-    width: 25%;
-  }
 
   li.kb-search-skills {
-    width: 25%;
-    > p {
-      display: inline-block;
-      border: solid thin black;
-      border-radius: 5px;
-      padding: 1px;
-      margin: 2px;
+    ul {
+      padding-left: 0;
     }
   }
 }
@@ -76,21 +82,27 @@ div.kb-search {
       margin-top: 10px;
       margin-bottom: 10px;
     }
+    select {
+      height: 26px;
+      width: 100px;
+    }
     button {
-      margin-top:5%;
+      margin-top: 5%;
     }
   }
 }
 
-@media (min-width:1200px) {
-
+@media (min-width: 1024px) {
   div.kb-search {
+    > section {
+      margin-top: 15%;
+    }
     h5, form {
       margin-top: 15px;
       margin-bottom: 15px;
-      ul.kb-skill {
-        width: 300px;
-      }
+    }
+    select {
+      width: 150px;
     }
   }
 }

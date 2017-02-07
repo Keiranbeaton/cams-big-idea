@@ -17,7 +17,7 @@ camApp.run(['$rootScope', ($rs) => {
       'Accept': 'application/json'
     }
   };
-  $rs.industryList = ['Software', 'Legal'];
+  $rs.industryList = [{name:'Software', value: 'Software'}, {name:'Legal', value: 'Legal'}];
 }]);
 
 require('./services')(camApp);
