@@ -1,14 +1,17 @@
 <div class="kb-profile" ng-init="profCtrl.getUser()">
   <section class="kb-prof-header">
-    <div class="kb-header-img">
+    <div class="kb-header-left">
       <img ng-src="{{profCtrl.image}}">
-      <button class="btn kb-btn kb-prof-button" ng-click="profCtrl.editingImage=true" ng-hide="!profCtrl.editing" ng-show="!profCtrl.editingImage"> Add/Update Image </button>
-      <div ng-show="profCtrl.editingImage">
-        <button class="btn kb-btn kb-prof-button" type="file" ngf-select="profCtrl.uploadImage($file, $invalidFiles)" accept="image/*" ngf-max-size="16MB"> Select Image File </button>
-        <button class="btn kb-kb kb-prof-button" ng-click="profCtrl.editingImage=false"> Cancel </button>
+      <div class="kb-header-buttons">
+        <button class="btn kb-btn" type="button" ng-if="profCtrl.ownProfile" ng-show="!profCtrl.editing" ng-click="profCtrl.editing=true"> Edit Profile </button>
+        <button class="btn kb-btn" ng-click="profCtrl.editingImage=true" ng-hide="!profCtrl.editing" ng-show="!profCtrl.editingImage"> Update Image </button>
+        <div ng-show="profCtrl.editingImage">
+          <button class="btn kb-btn" type="file" ngf-select="profCtrl.uploadImage($file, $invalidFiles)" accept="image/*" ngf-max-size="16MB"> Select File </button>
+          <button class="btn kb-btn" ng-click="profCtrl.editingImage=false"> Cancel </button>
+        </div>
       </div>
     </div>
-    <div class="kb-header-info" ng-show="!profCtrl.editing">
+    <div class="kb-header-right" ng-show="!profCtrl.editing">
       <h2>{{profCtrl.user.firstName}} {{profCtrl.user.lastName}}</h2>
       <h3>{{profCtrl.user.position}}</h3>
       <h4>{{profCtrl.user.companyName}}</h4>
@@ -16,84 +19,85 @@
       <h4>Looking to work {{profCtrl.availability}} hours per week</h4>
       <h4>Member Since {{profCtrl.user.memberSince}}</h4>
     </div>
-    <button class="btn kb-btn kb-prof-button" type="button" ng-if="profCtrl.ownProfile" ng-show="!profCtrl.editing" ng-click="profCtrl.editing=true"> Edit Profile </button>
     <form ng-submit="profCtrl.updateUser()" ng-hide="!profCtrl.editing" class="kb-update-form">
-      <div class="kb-update-group">
+      <div class="kb-form-group">
         <label for="firstName"> First name: </label>
         <input type="text" name="firstName" ng-model="profCtrl.user.firstName">
       </div>
-      <div class="kb-update-group">
+      <div class="kb-form-group">
         <label for="lastName"> Last name: </label>
         <input type="text" name="lastName" ng-model="profCtrl.user.lastName">
       </div>
-      <div class="kb-update-group">
+      <div class="kb-form-group">
         <label for="position"> Position: </label>
         <input type="text" name="position" ng-model="profCtrl.user.position">
       </div>
-      <div class="kb-update-group">
+      <div class="kb-form-group">
         <label for="company"> Company: </label>
         <input type="text" name="company" ng-model="profCtrl.user.companyName">
       </div>
-      <div class="kb-update-group">
+      <div class="kb-form-group">
         <label for="locationCity">City:</label>
         <input type="text" name="locationCity" ng-model="profCtrl.user.locationCity">
       </div>
-      <div class="kb-update-group">
+      <div class="kb-form-group">
         <label for="locationState">State/Province:</label>
         <input type="text" name="locationState" ng-model="profCtrl.user.locationState">
       </div>
-      <div class="kb-update-group">
+      <div class="kb-form-group">
         <label for="locationCountry">Country:</label>
         <input type="text" name="Country" ng-model="profCtrl.user.locationCountry">
       </div>
-      <div class="kb-update-group">
+      <div class="kb-form-group">
         <label for="availability"> How many hours would you like to work per week? </label>
         <input type="text" name="availability" ng-model="profCtrl.user.availability">
       </div>
-      <button class="btn kb-btn kb-prof-button" type="submit" ng-hide="!profCtrl.editing"> Save Profile </button>
-      <button class="btn kb-btn kb-prof-button" type="button" ng-if="profCtrl.ownProfile" ng-show="profCtrl.editing" ng-click="profCtrl.deleteUser(profCtrl.user)"> Delete User </button>
+      <div class="kb-submit">
+        <button class="btn kb-btn" type="submit" ng-hide="!profCtrl.editing"> Save Profile </button>
+        <button class="btn kb-btn" type="button" ng-if="profCtrl.ownProfile" ng-show="profCtrl.editing" ng-click="profCtrl.deleteUser(profCtrl.user)"> Delete User </button>
+      </div>
       </form>
   </section>
   <section class="kb-prof-experience kb-prof-list">
-    <h4>Experience</h4>
+    <h3><b>Experience</b></h3>
     <ul>
       <li ng-repeat="exp in profCtrl.experience">
-        <h5>{{exp.title}}</h5>
+        <h4>{{exp.title}}</h4>
         <p>{{exp.company}}</p>
         <p>{{exp.start}} - {{exp.finish}}</p>
         <p>{{exp.description}}</p>
-        <button class="btn kb-btn kb-prof-button" ng-click="profCtrl.removeExperience(exp)" ng-show="profCtrl.editing">Remove Experience</button>
+        <button class="btn kb-btn" ng-click="profCtrl.removeExperience(exp)" ng-show="profCtrl.editing">Remove Experience</button>
       </li>
     </ul>
-    <button class="btn kb-btn kb-prof-button" ng-click="profCtrl.editingExperience=true" ng-hide="!profCtrl.editing" ng-show="!profCtrl.editingExperience"> Add Experience </button>
-    <button class="btn kb-btn kb-prof-button" ng-show="profCtrl.editingExperience" ng-click="profCtrl.editingExperience=false"> Cancel </button>
+    <button class="btn kb-btn" ng-click="profCtrl.editingExperience=true" ng-hide="!profCtrl.editing" ng-show="!profCtrl.editingExperience"> Add Experience </button>
+    <button class="btn kb-btn" ng-show="profCtrl.editingExperience" ng-click="profCtrl.editingExperience=false"> Cancel </button>
     <kb-experience-form ng-show="profCtrl.editingExperience" save="profCtrl.addExperience(experience)"></kb-experience-form>
   </section>
   <section class="kb-prof-skill kb-prof-list">
-    <h4>Skills/Areas of Expertise</h4>
+    <h3><b>Skills/Areas of Expertise</b></h3>
     <ul>
       <li ng-repeat="skill in profCtrl.skills" class="kb-skill">
-        <p> {{skill.content}} <button class="btn btn-default kb-skill-button" ng-click="profCtrl.removeSkill(skill)" ng-show="profCtrl.editing">X</button></p>
+        <p> {{skill.content}} <button class="btn kb-skill-button" ng-click="profCtrl.removeSkill(skill)" ng-show="profCtrl.editing">X</button></p>
       </li>
     </ul>
-    <button class="btn kb-btn kb-prof-button" ng-click="profCtrl.editingSkills=true" ng-hide="!profCtrl.editing" ng-show="!profCtrl.editingSkills"> Add Skill </button>
-    <button class="btn kb-btn kb-prof-button" ng-show="profCtrl.editingSkills" ng-click="profCtrl.editingSkills=false"> Cancel </button>
+    <button class="btn kb-btn" ng-click="profCtrl.editingSkills=true" ng-hide="!profCtrl.editing" ng-show="!profCtrl.editingSkills"> Add Skill </button>
+    <button class="btn kb-btn" ng-show="profCtrl.editingSkills" ng-click="profCtrl.editingSkills=false"> Cancel </button>
     <kb-skill-form ng-show="profCtrl.editingSkills" save="profCtrl.addSkill(skill)"></kb-skill-form>
   </section>
   <section class="kb-prof-education kb-prof-list">
-    <h4>Education</h4>
+    <h3><b>Education</b></h3>
     <ul>
       <li ng-repeat="edu in profCtrl.education">
-          <h5>{{edu.school}}</h5>
-          <h6>{{edu.degree}}</h6>
-          <h6>{{edu.major}}</h6>
+          <h4>{{edu.school}}</h4>
+          <p>{{edu.degree}}</p>
+          <p>{{edu.major}}</p>
           <p>{{edu.start}} - {{edu.finish}}</p>
           <p>{{edu.description}}</p>
-          <button class="btn kb-btn kb-prof-button" ng-click="profCtrl.removeEducation(edu)" ng-show="profCtrl.editing"> Remove Education </button>
+          <button class="btn kb-btn" ng-click="profCtrl.removeEducation(edu)" ng-show="profCtrl.editing"> Remove Education </button>
       </li>
     </ul>
-    <button class="btn kb-btn kb-prof-button" ng-click="profCtrl.editingEducation=true" ng-hide="!profCtrl.editing" ng-show="!profCtrl.editingEducation"> Add Education </button>
-    <button class="btn kb-btn kb-prof-button" ng-show="profCtrl.editingEducation" ng-click="profCtrl.editingEducation=false"> Cancel </button>
+    <button class="btn kb-btn" ng-click="profCtrl.editingEducation=true" ng-hide="!profCtrl.editing" ng-show="!profCtrl.editingEducation"> Add Education </button>
+    <button class="btn kb-btn" ng-show="profCtrl.editingEducation" ng-click="profCtrl.editingEducation=false"> Cancel </button>
     <kb-education-form ng-show="profCtrl.editingEducation" save="profCtrl.addEducation(education)"></kb-education-form>
   </section>
 </div>

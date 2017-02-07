@@ -2,8 +2,7 @@
   <section ng-if="searchCtrl.searchIndustry==='none'" class="kb-border">
     <h5>Select Industry to Find a Professional</h5>
     <form>
-      <select ng-model="searchCtrl.searchIndustry">
-        <option ng-repeat="item in searchCtrl.industryList" value={{item}}>{{item}}</option>
+      <select ng-model="searchCtrl.searchIndustry" ng-options="option.value as option.name for option in searchCtrl.industryList">
       </select>
     </form>
   </section>
@@ -11,10 +10,10 @@
   <ul ng-if="searchCtrl.searchIndustry=='Legal'" class="kb-search-result kb-border">
     <li class="kb-search-row">
       <ul class="kb-search-header">
-        <li class="kb-search-name"> Name </li>
-        <li class="kb-search-position"> Position </li>
-        <li class="kb-search-location"> Location </li>
-        <li class="kb-search-skills"> Skills </li>
+        <li class="kb-search-name"><b> Name </b></li>
+        <li class="kb-search-position"><b> Position </b></li>
+        <li class="kb-search-location"><b> Location </b></li>
+        <li class="kb-search-skills"><b> Skills </b></li>
       </ul>
     </li>
     <li ng-repeat="user in searchCtrl.legal" class="kb-search-row">
@@ -35,10 +34,10 @@
   <ul ng-if="searchCtrl.searchIndustry=='Software'" class="kb-search-result kb-border">
     <li class="kb-search-row">
       <ul class="kb-search-header">
-        <li class="kb-search-name"> Name </li>
-        <li class="kb-search-position"> Position </li>
-        <li class="kb-search-location"> Location </li>
-        <li class="kb-search-skills"> Skills </li>
+        <li class="kb-search-name"><b> Name </b></li>
+        <li class="kb-search-position"><b> Position </b></li>
+        <li class="kb-search-location"><b> Location </b></li>
+        <li class="kb-search-skills"><b> Skills </b></li>
       </ul>
     </li>
     <li ng-repeat="user in searchCtrl.software" class="kb-search-row">

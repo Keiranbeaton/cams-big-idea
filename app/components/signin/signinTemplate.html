@@ -1,11 +1,11 @@
 <div ng-init="$ctrl.checkUser()">
-  <form class="kb-login" name="signin" ng-submit="$ctrl.signin($ctrl.user)">
-    <div class="form-group">
+  <form class="kb-auth-form" name="signin" ng-submit="$ctrl.signin($ctrl.user)">
+    <div class="kb-form-group">
       <label for="email">Email:</label>
       <input type="text" required ng-model="$ctrl.user.email">
     </div>
     <p ng-if="$ctrl.wrongPassword"> Sorry, We didn't recognize your email or password, please try again </p>
-    <div class="form-group">
+    <div class="kb-form-group">
       <label for="password">Password:</label>
       <input type="password" required ng-model="$ctrl.user.password">
     </div>

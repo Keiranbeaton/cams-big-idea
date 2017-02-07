@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('AuthController', ['$http', '$location', '$window', '$log', 'auth', function($http, $location, $window, $log, auth) {
+  app.controller('AuthController', ['$http', '$location', '$window', '$log', '$scope','auth', function($http, $location, $window, $log, $scope, auth) {
     this.wrongPassword = false;
     this.currentUser = {};
     this.signupUser = function(user) {

@@ -1,15 +1,13 @@
-form.kb-signup {
+form.kb-auth-form {
   margin-left: $kb-mobile-gutter;
   p.kb-error {
     color: $kb-error;
   }
-}
+  select {
+    height: 20px;
+  }
+  option {
 
-form.kb-login {
-  padding-left: $kb-mobile-gutter;
-  p {
-    color: $kb-error;
-    margin-right: $kb-mobile-gutter;
   }
 }
 

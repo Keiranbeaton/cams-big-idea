@@ -2,32 +2,9 @@
 @import "vendors/font-awesome-4.6.3/scss/font-awesome.scss";
 @import "themes";
 @import "margins";
-@import "custom-classes";
-
-html {
-  height: 100%;
-}
-
-body {
-  position: relative;
-  margin: 0;
-  padding-bottom: 50px;
-  min-height: 100%;
-  font-size: 12px;
-  background-color: $kb-color2;
-}
-
-h1, h2, h3, h4, h5 {
-  color: black;
-}
-
-a, p, li {
-  color: $kb-color4;
-}
-
+@import "app-custom";
 @import "header-footer";
 @import "home";
 @import "profile";
-@import "edit-profile";
 @import "search";
 @import "login-logout";

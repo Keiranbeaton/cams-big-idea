@@ -1,0 +1,86 @@
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 50px;
+  min-height: 100%;
+  font-size: 12px;
+  background-color: $kb-color2;
+}
+
+h1, h2, h3, h4, h5, li, p {
+  color: $kb-black;
+}
+
+a {
+  color: $kb-color4;
+}
+
+input, textarea, select, option {
+  color: $kb-black;
+  background-color: $kb-color2;
+  border: solid thin $kb-color4;
+  padding: 1px;
+  &:focus {
+    border-color: $kb-color3;
+  }
+}
+
+textarea {
+  resize: none;
+}
+
+.kb-border {
+  border: solid thin $kb-color4;
+  border-radius: 5px;
+}
+
+div.kb-form-group {
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+  > label {
+    width: 100%;
+    margin-bottom: 0px;
+  }
+  input {
+    width: 146px;
+  }
+}
+
+button.kb-btn {
+  color: $kb-color4;
+  background-color: $kb-color1;
+  border-color: $kb-color4;
+  max-width: 100%;
+  &:hover {
+    color: $kb-color4;
+    background-color: $kb-color2;
+  }
+}
+
+li.kb-skill {
+  @extend .kb-border;
+  background-color: $kb-color2;
+  display: inline-block;
+  margin-left: 0;
+  margin-right: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  p {
+    color: $kb-color4;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  label {
+    font-size: 20px;
+  }
+  input {
+    font-size: 14px;
+  }
+}
